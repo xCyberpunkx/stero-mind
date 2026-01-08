@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Radio, Github, Globe, ArrowLeft, Mail, Lock, Eye, EyeOff, User } from "lucide-react";
+import { Radio, Github, Globe, ArrowLeft, Mail, Lock, Eye, EyeOff, User, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { signInWithGoogle, signInWithGithub, signUpWithEmail } from "@/app/auth/actions";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -28,18 +29,39 @@ export default function SignupPage() {
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
   async function handleEmailSignUp(formData: FormData) {
+    console.log("[Signup] Starting signup protocol...");
     setIsLoading(true);
     setMessage(null);
 
-    const result = await signUpWithEmail(formData);
+    try {
+      const email = formData.get('email') as string;
+      console.log(`[Signup] Attempting signup for: ${email}`);
 
-    if (result?.error) {
-      setMessage({ type: 'error', text: result.error });
-    } else if (result?.success) {
-      setMessage({ type: 'success', text: result.message || 'Check your email for confirmation' });
+      const result = await signUpWithEmail(formData);
+
+      if (result?.error) {
+        console.error(`[Signup] Protocol error: ${result.error}`);
+        setMessage({ type: 'error', text: result.error });
+        toast.error("Signup Failed", {
+          description: result.error
+        });
+      } else if (result?.success) {
+        console.log("[Signup] Protocol accepted!");
+        setMessage({ type: 'success', text: result.message || 'Check your email for confirmation' });
+        toast.success("Account Created", {
+          description: "Welcome to the Stereo Mind protocol."
+        });
+      }
+    } catch (err) {
+      console.error("[Signup] Fatal exception:", err);
+      const errorMessage = err instanceof Error ? err.message : "An unexpected error occurred. Please try again.";
+      setMessage({ type: 'error', text: errorMessage });
+      toast.error("System Error", {
+        description: errorMessage
+      });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   return (
@@ -93,75 +115,107 @@ export default function SignupPage() {
               Create your account to secure your spot in the Stereo Mind alpha protocol.
             </motion.p>
 
-            {message && (
+            {message?.type === 'success' ? (
               <motion.div
-                variants={fadeIn}
-                className={`mb-6 p-4 border-2 border-black ${message.type === 'success' ? 'bg-green-100' : 'bg-red-100'}`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="border-4 border-black bg-secondary p-8 md:p-12 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] text-center my-8"
               >
-                <p className="font-code text-sm font-bold">{message.text}</p>
+                <div className="flex justify-center mb-6">
+                  <div className="w-16 h-16 border-4 border-black bg-white flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <Radio className="w-8 h-8" />
+                  </div>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 uppercase tracking-tighter">PROTOCOL ADMITTED</h2>
+                <p className="font-code text-base font-bold mb-8 leading-relaxed">
+                  {message.text}
+                </p>
+                <Link href="/">
+                  <Button className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-14 font-code font-bold">
+                    Return to Protocol
+                  </Button>
+                </Link>
               </motion.div>
-            )}
+            ) : (
+              <>
+                {message && (
+                  <motion.div
+                    variants={fadeIn}
+                    className="mb-6 p-4 border-2 border-black bg-red-100"
+                  >
+                    <p className="font-code text-sm font-bold">{message.text}</p>
+                  </motion.div>
+                )}
 
-            <motion.form variants={fadeIn} action={handleEmailSignUp} className="space-y-4 mb-8">
-              <div className="flex gap-4">
-                <div className="relative w-full">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
-                  <Input
-                    type="text"
-                    name="first_name"
-                    placeholder="First Name"
-                    required
-                    className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                  />
-                </div>
-                <div className="relative w-full">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
-                  <Input
-                    type="text"
-                    name="last_name"
-                    placeholder="Last Name"
-                    required
-                    className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                  />
-                </div>
-              </div>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Email address"
-                  required
-                  className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                />
-              </div>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Password (min 6 characters)"
-                  required
-                  minLength={6}
-                  className="w-full h-14 pl-12 pr-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5 text-black/50" /> : <Eye className="w-5 h-5 text-black/50" />}
-                </button>
-              </div>
-              <Button
-                type="submit"
-                disabled={isLoading}
-                size="lg"
-                className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all"
-              >
-                {isLoading ? "Creating Account..." : "Create Account"}
-              </Button>
-            </motion.form>
+                <motion.form variants={fadeIn} action={handleEmailSignUp} className="space-y-4 mb-8">
+                  <div className="flex gap-4">
+                    <div className="relative w-full">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
+                      <Input
+                        type="text"
+                        name="first_name"
+                        placeholder="First Name"
+                        required
+                        className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                      />
+                    </div>
+                    <div className="relative w-full">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
+                      <Input
+                        type="text"
+                        name="last_name"
+                        placeholder="Last Name"
+                        required
+                        className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                      />
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="Email address"
+                      required
+                      className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                    />
+                  </div>
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="Password (min 6 characters)"
+                      required
+                      minLength={6}
+                      className="w-full h-14 pl-12 pr-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5 text-black/50" /> : <Eye className="w-5 h-5 text-black/50" />}
+                    </button>
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    size="lg"
+                    className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-6 h-6 animate-spin" />
+                        Initializing Protocol...
+                      </>
+                    ) : (
+                      "Create Account"
+                    )}
+                  </Button>
+                </motion.form>
+              </>
+            )}
 
             <motion.div variants={fadeIn} className="relative my-8">
               <div className="absolute inset-0 flex items-center">

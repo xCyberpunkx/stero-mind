@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Radio, Github, Globe, ArrowLeft, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Radio, Github, Globe, ArrowLeft, Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { signInWithGoogle, signInWithGithub, signInWithEmail } from "@/app/auth/actions";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -38,24 +39,44 @@ export default function LoginPage() {
   }, []);
 
   async function handleEmailSignIn(formData: FormData) {
+    console.log("[Login] Initiating authentication sequence...");
     setIsLoading(true);
     setMessage(null);
 
-    const email = formData.get('email') as string;
+    try {
+      const email = formData.get('email') as string;
+      console.log(`[Login] Attempting sign-in for: ${email}`);
 
-    if (rememberMe) {
-      localStorage.setItem('rememberedEmail', email);
-    } else {
-      localStorage.removeItem('rememberedEmail');
+      if (rememberMe) {
+        localStorage.setItem('rememberedEmail', email);
+      } else {
+        localStorage.removeItem('rememberedEmail');
+      }
+
+      const result = await signInWithEmail(formData);
+
+      if (result?.error) {
+        console.error(`[Login] Authentication failed: ${result.error}`);
+        setMessage({ type: 'error', text: result.error });
+        toast.error("Sign In Failed", {
+          description: result.error
+        });
+      } else {
+        console.log("[Login] Authentication successful. Access granted.");
+        toast.success("Welcome Back", {
+          description: "Login successful."
+        });
+      }
+    } catch (err) {
+      console.error("[Login] Fatal exception during sign-in:", err);
+      const errorMessage = err instanceof Error ? err.message : "An unexpected error occurred. Please try again.";
+      setMessage({ type: 'error', text: errorMessage });
+      toast.error("System Error", {
+        description: errorMessage
+      });
+    } finally {
+      setIsLoading(false);
     }
-
-    const result = await signInWithEmail(formData);
-
-    if (result?.error) {
-      setMessage({ type: 'error', text: result.error });
-    }
-
-    setIsLoading(false);
   }
 
   return (
@@ -167,9 +188,16 @@ export default function LoginPage() {
                 type="submit"
                 disabled={isLoading}
                 size="lg"
-                className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all"
+                className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
               >
-                {isLoading ? "Signing in..." : "Sign In"}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-6 h-6 animate-spin" />
+                    Verifying Access...
+                  </>
+                ) : (
+                  "Sign In"
+                )}
               </Button>
             </motion.form>
 
