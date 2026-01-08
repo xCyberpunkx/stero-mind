@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Radio, ArrowLeft, Lock, Eye, EyeOff } from "lucide-react";
+import { Radio, ArrowLeft, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { updatePassword } from "@/app/auth/actions";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -29,31 +30,58 @@ export default function ResetPasswordPage() {
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
   async function handleUpdatePassword(formData: FormData) {
+    console.log("[Reset] Initiating password update protocol...");
     setIsLoading(true);
     setMessage(null);
-    
-    const password = formData.get('password') as string;
-    const confirmPassword = formData.get('confirmPassword') as string;
-    
-    if (password !== confirmPassword) {
-      setMessage({ type: 'error', text: 'Passwords do not match' });
+
+    try {
+      const password = formData.get('password') as string;
+      const confirmPassword = formData.get('confirmPassword') as string;
+
+      if (password !== confirmPassword) {
+        console.error("[Reset] Password mismatch detected.");
+        setMessage({ type: 'error', text: 'Passwords do not match' });
+        toast.error("Mismatch Error", {
+          description: "Passwords do not match."
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const result = await updatePassword(formData);
+
+      if (result?.error) {
+        console.error(`[Reset] Protocol error: ${result.error}`);
+        setMessage({ type: 'error', text: result.error });
+        toast.error("Update Failed", {
+          description: result.error
+        });
+      } else {
+        console.log("[Reset] Protocol updated. Access restored.");
+        toast.success("Password Updated", {
+          description: "Redirecting to gateway..."
+        });
+      }
+    } catch (err) {
+      if (err instanceof Error && err.message === 'NEXT_REDIRECT') {
+        // Let Next.js handle the redirect
+        return;
+      }
+      console.error("[Reset] Fatal exception:", err);
+      const errorMessage = err instanceof Error ? err.message : "An unexpected error occurred. Please try again.";
+      setMessage({ type: 'error', text: errorMessage });
+      toast.error("System Error", {
+        description: errorMessage
+      });
+    } finally {
       setIsLoading(false);
-      return;
     }
-    
-    const result = await updatePassword(formData);
-    
-    if (result?.error) {
-      setMessage({ type: 'error', text: result.error });
-    }
-    
-    setIsLoading(false);
   }
 
   return (
     <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
       <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
-      
+
       <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
@@ -81,7 +109,7 @@ export default function ResetPasswordPage() {
           >
             <motion.div variants={fadeIn} className="mb-8">
               <span className="inline-block border-2 border-black px-4 py-1 font-code text-xs font-bold bg-secondary uppercase tracking-widest">
-                SET NEW PASSWORD
+                CREDENTIAL UPDATE
               </span>
             </motion.div>
 
@@ -90,7 +118,7 @@ export default function ResetPasswordPage() {
               className="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-tighter leading-tight"
               style={{ fontFamily: "var(--font-serif)" }}
             >
-              Create new <br />
+              Set new <br />
               <span className="italic decoration-black underline underline-offset-8">Password.</span>
             </motion.h1>
 
@@ -98,15 +126,20 @@ export default function ResetPasswordPage() {
               variants={fadeIn}
               className="text-lg md:text-xl mb-8 font-medium text-black/70 leading-relaxed"
             >
-              Enter your new password below. Make sure it&apos;s at least 6 characters long.
+              Enter your new credentials below. Minimum 6 characters required.
             </motion.p>
 
             {message && (
-              <motion.div 
+              <motion.div
                 variants={fadeIn}
-                className={`mb-6 p-4 border-2 border-black ${message.type === 'success' ? 'bg-green-100' : 'bg-red-100'}`}
+                className={`mb-6 p-4 border-2 ${message.type === 'success'
+                  ? 'border-green-600 bg-green-50 text-green-700'
+                  : 'border-red-600 bg-red-50 text-red-600'
+                  }`}
               >
-                <p className="font-code text-sm font-bold">{message.text}</p>
+                <p className="font-code text-sm font-bold uppercase tracking-tight">
+                  {message.type === 'error' ? '(!) Error: ' : ''}{message.text}
+                </p>
               </motion.div>
             )}
 
@@ -129,7 +162,7 @@ export default function ResetPasswordPage() {
                   {showPassword ? <EyeOff className="w-5 h-5 text-black/50" /> : <Eye className="w-5 h-5 text-black/50" />}
                 </button>
               </div>
-              
+
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
                 <Input
@@ -148,14 +181,21 @@ export default function ResetPasswordPage() {
                   {showConfirmPassword ? <EyeOff className="w-5 h-5 text-black/50" /> : <Eye className="w-5 h-5 text-black/50" />}
                 </button>
               </div>
-              
+
               <Button
                 type="submit"
                 disabled={isLoading}
                 size="lg"
-                className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all"
+                className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
               >
-                {isLoading ? "Updating..." : "Update Password"}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-6 h-6 animate-spin" />
+                    Updating Protocol...
+                  </>
+                ) : (
+                  "Update Password"
+                )}
               </Button>
             </motion.form>
 

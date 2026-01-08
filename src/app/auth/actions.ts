@@ -117,7 +117,7 @@ export async function resetPassword(formData: FormData) {
   }
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/reset-password`,
+    redirectTo: `${origin}/auth/callback?next=/auth/reset-password`,
   })
 
   if (error) {
@@ -150,6 +150,7 @@ export async function updatePassword(formData: FormData) {
     return { error: error.message }
   }
 
+  // Next.js redirect throws a specific error that needs to be handled on the client
   redirect('/login')
 }
 
