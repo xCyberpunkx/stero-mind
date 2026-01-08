@@ -18,6 +18,8 @@ import {
   Share2,
   Terminal,
 } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/UserNav";
 
 const fadeIn = {
@@ -38,7 +40,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
       <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
-      
+
       <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -71,7 +73,7 @@ export default function Home() {
                   v0.1.0-alpha // Open Source Protocol
                 </span>
               </motion.div>
-              
+
               <motion.h1
                 variants={fadeIn}
                 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
@@ -80,37 +82,37 @@ export default function Home() {
                 Build your mind<br />
                 <span className="italic decoration-black underline underline-offset-8">like a system.</span>
               </motion.h1>
-              
+
               <motion.p
                 variants={fadeIn}
                 className="text-xl md:text-2xl text-black font-medium max-w-2xl mb-12 leading-tight"
               >
-                Stereo Mind is an ambitious, open-source knowledge architecture. 
-                It's not an app; it's a personal infrastructure for tracking learning, 
+                Stereo Mind is an ambitious, open-source knowledge architecture.
+                It's not an app; it's a personal infrastructure for tracking learning,
                 visualizing cognition, and engineering a systematic life.
               </motion.p>
-              
-                <motion.div variants={fadeIn} className="flex flex-col gap-6">
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/signup" className="w-full sm:w-auto">
-                      <Button
-                        size="lg"
-                        className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
-                      >
-                        JOIN THE WAITLIST.OS
-                        <ChevronRight className="w-5 h-5" />
-                      </Button>
-                    </Link>
-                  </div>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-secondary transition-all w-fit"
-                  >
-                    Learn more
-                    <ChevronRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </motion.div>
+
+              <motion.div variants={fadeIn} className="flex flex-col gap-6">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link href="/signup" className="w-full sm:w-auto">
+                    <Button
+                      size="lg"
+                      className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
+                    >
+                      JOIN THE WAITLIST.OS
+                      <ChevronRight className="w-5 h-5" />
+                    </Button>
+                  </Link>
+                </div>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-secondary transition-all w-fit"
+                >
+                  Learn more
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </Button>
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -126,17 +128,17 @@ export default function Home() {
                 </h2>
                 <div className="space-y-6 text-lg md:text-xl font-light opacity-80">
                   <p>
-                    Most tools treat your brain like a garbage bin for tasks. 
+                    Most tools treat your brain like a garbage bin for tasks.
                     We treat it like a high-fidelity processor.
                   </p>
                   <p>
-                    Stereo Mind is built on the principle of "Intentional Feedback Loops." 
-                    By measuring the learning process—not just the result—you create 
+                    Stereo Mind is built on the principle of "Intentional Feedback Loops."
+                    By measuring the learning process—not just the result—you create
                     a compounding asset: your own mind.
                   </p>
                   <p className="font-code text-sm border-l-4 border-white pl-6 py-2">
-                    // MISSION: To provide the world with a transparent, 
-                    // sovereign, and extensible system for human growth.
+                    // MISSION: To provide the world with a transparent,
+                  // sovereign, and extensible system for human growth.
                   </p>
                 </div>
               </div>
@@ -164,7 +166,7 @@ export default function Home() {
                 </h2>
               </div>
               <div className="max-w-md text-muted-foreground font-medium">
-                A massive undertaking involving integrated data structures, 
+                A massive undertaking involving integrated data structures,
                 real-time visualization, and local-first architecture.
               </div>
             </div>
@@ -258,9 +260,9 @@ export default function Home() {
                 <Github className="w-12 h-12 mb-6" />
                 <h2 className="text-4xl font-bold uppercase mb-6 font-code">Fully Open Source</h2>
                 <p className="text-lg mb-8 text-black/80">
-                  Stereo Mind is a public utility for human development. 
-                  The entire stack is open. We believe a system this important 
-                  cannot be owned by a single corporation. 
+                  Stereo Mind is a public utility for human development.
+                  The entire stack is open. We believe a system this important
+                  cannot be owned by a single corporation.
                 </p>
                 <div className="flex items-center gap-6">
                   <Button className="ml-auto bg-black text-white hover:bg-secondary hover:text-black border-2 border-black rounded-none px-6 h-12 font-code font-bold uppercase">
@@ -345,7 +347,7 @@ export default function Home() {
                   <span className="font-bold text-2xl uppercase font-code tracking-tighter">Stereo Mind</span>
                 </div>
                 <p className="text-sm font-medium leading-relaxed">
-                  The world's first open-source cognitive infrastructure. 
+                  The world's first open-source cognitive infrastructure.
                   Measure what matters. Grow through clarity.
                 </p>
               </div>

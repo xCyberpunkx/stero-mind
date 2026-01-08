@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Radio, Github, Globe, ArrowLeft, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Radio, Github, Globe, ArrowLeft, Mail, Lock, Eye, EyeOff, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -30,22 +30,22 @@ export default function SignupPage() {
   async function handleEmailSignUp(formData: FormData) {
     setIsLoading(true);
     setMessage(null);
-    
+
     const result = await signUpWithEmail(formData);
-    
+
     if (result?.error) {
       setMessage({ type: 'error', text: result.error });
     } else if (result?.success) {
       setMessage({ type: 'success', text: result.message || 'Check your email for confirmation' });
     }
-    
+
     setIsLoading(false);
   }
 
   return (
     <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
       <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
-      
+
       <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
@@ -94,7 +94,7 @@ export default function SignupPage() {
             </motion.p>
 
             {message && (
-              <motion.div 
+              <motion.div
                 variants={fadeIn}
                 className={`mb-6 p-4 border-2 border-black ${message.type === 'success' ? 'bg-green-100' : 'bg-red-100'}`}
               >
@@ -103,6 +103,16 @@ export default function SignupPage() {
             )}
 
             <motion.form variants={fadeIn} action={handleEmailSignUp} className="space-y-4 mb-8">
+              <div className="relative">
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
+                <Input
+                  type="text"
+                  name="full_name"
+                  placeholder="Full Name"
+                  required
+                  className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                />
+              </div>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
                 <Input
@@ -180,7 +190,7 @@ export default function SignupPage() {
 
             <motion.div variants={fadeIn} className="mt-8 pt-8 border-t-2 border-black/10">
               <p className="text-[10px] font-bold font-code opacity-50 uppercase text-center leading-relaxed">
-                By creating an account, you agree to the Stereo Mind Protocol Terms of Service and Data Sovereignty Agreement. 
+                By creating an account, you agree to the Stereo Mind Protocol Terms of Service and Data Sovereignty Agreement.
                 V0.1.0-ALPHA // STABLE BRANCH: MAIN
               </p>
             </motion.div>

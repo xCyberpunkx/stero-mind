@@ -49,12 +49,13 @@ export async function signInWithGithub() {
 export async function signUpWithEmail(formData: FormData) {
   const supabase = await createClient()
   const origin = (await headers()).get('origin')
-  
+
   const email = formData.get('email') as string
   const password = formData.get('password') as string
+  const fullName = formData.get('full_name') as string
 
-  if (!email || !password) {
-    return { error: 'Email and password are required' }
+  if (!email || !password || !fullName) {
+    return { error: 'All fields are required' }
   }
 
   if (password.length < 6) {
@@ -66,6 +67,9 @@ export async function signUpWithEmail(formData: FormData) {
     password,
     options: {
       emailRedirectTo: `${origin}/auth/callback?next=/thank-you`,
+      data: {
+        full_name: fullName,
+      },
     },
   })
 
@@ -79,7 +83,7 @@ export async function signUpWithEmail(formData: FormData) {
 
 export async function signInWithEmail(formData: FormData) {
   const supabase = await createClient()
-  
+
   const email = formData.get('email') as string
   const password = formData.get('password') as string
 
@@ -103,7 +107,7 @@ export async function signInWithEmail(formData: FormData) {
 export async function resetPassword(formData: FormData) {
   const supabase = await createClient()
   const origin = (await headers()).get('origin')
-  
+
   const email = formData.get('email') as string
 
   if (!email) {
@@ -124,7 +128,7 @@ export async function resetPassword(formData: FormData) {
 
 export async function updatePassword(formData: FormData) {
   const supabase = await createClient()
-  
+
   const password = formData.get('password') as string
 
   if (!password) {
