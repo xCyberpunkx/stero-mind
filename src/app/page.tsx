@@ -18,6 +18,8 @@ import {
   Share2,
   Terminal,
 } from "lucide-react";
+import Link from "next/link";
+import { signInWithGoogle, signInWithGithub } from "@/app/auth/actions";
 import { Button } from "@/components/ui/button";
 
 const fadeIn = {
@@ -52,9 +54,11 @@ export default function Home() {
             <a href="#features" className="hover:underline underline-offset-4">SYSTEMS</a>
             <a href="#open-source" className="hover:underline underline-offset-4">OPEN SOURCE</a>
           </div>
-          <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black transition-all rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-6 h-10 font-code font-bold text-xs">
-            WAITLIST.OS
-          </Button>
+          <Link href="/signup">
+            <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black transition-all rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-6 h-10 font-code font-bold text-xs">
+              WAITLIST.OS
+            </Button>
+          </Link>
         </div>
       </nav>
 
@@ -92,17 +96,22 @@ export default function Home() {
                 visualizing cognition, and engineering a systematic life.
               </motion.p>
               
-                <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-6">
-                  <Button
-                    size="lg"
-                    className="bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all"
-                  >
-                    Join the wait list
-                  </Button>
+                <motion.div variants={fadeIn} className="flex flex-col gap-6">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Link href="/signup" className="w-full sm:w-auto">
+                      <Button
+                        size="lg"
+                        className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
+                      >
+                        JOIN THE WAITLIST.OS
+                        <ChevronRight className="w-5 h-5" />
+                      </Button>
+                    </Link>
+                  </div>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-secondary transition-all"
+                    className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-secondary transition-all w-fit"
                   >
                     Learn more
                     <ChevronRight className="w-5 h-5 ml-2" />
@@ -310,17 +319,22 @@ export default function Home() {
               Join the waitlist for the alpha launch. <br className="hidden md:block" />
               Be part of the next evolution of human cognition.
             </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-              <Button
-                size="lg"
-                className="w-full md:w-auto bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-12 h-20 text-xl font-code font-bold transition-all"
-              >
-                Join the wait list
-              </Button>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+              <Link href="/signup" className="w-full md:w-auto">
+                <Button
+                  size="lg"
+                  className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-12 h-20 text-xl font-code font-bold transition-all flex items-center justify-center gap-4"
+                >
+                  INITIALIZE ACCESS
+                  <ChevronRight className="w-6 h-6" />
+                </Button>
+              </Link>
+            </div>
+            <div className="mt-8">
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full md:w-auto border-2 border-black bg-white rounded-none h-20 px-12 text-lg font-code font-bold hover:bg-secondary"
+                className="w-full md:w-auto border-2 border-black bg-white rounded-none h-16 px-12 text-lg font-code font-bold hover:bg-secondary"
               >
                 Read the Whitepaper
               </Button>
