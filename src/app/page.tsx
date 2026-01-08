@@ -18,9 +18,7 @@ import {
   Share2,
   Terminal,
 } from "lucide-react";
-import Link from "next/link";
-import { signInWithGoogle, signInWithGithub } from "@/app/auth/actions";
-import { Button } from "@/components/ui/button";
+import { UserNav } from "@/components/UserNav";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -54,11 +52,7 @@ export default function Home() {
             <a href="#features" className="hover:underline underline-offset-4">SYSTEMS</a>
             <a href="#open-source" className="hover:underline underline-offset-4">OPEN SOURCE</a>
           </div>
-          <Link href="/signup">
-            <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black transition-all rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-6 h-10 font-code font-bold text-xs">
-              WAITLIST.OS
-            </Button>
-          </Link>
+          <UserNav />
         </div>
       </nav>
 

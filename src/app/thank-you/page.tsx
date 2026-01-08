@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { User } from "@supabase/supabase-js";
+import { UserNav } from "@/components/UserNav";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -42,6 +43,7 @@ export default function ThankYou() {
             </div>
             <span className="font-bold text-xl tracking-tighter uppercase font-code">Stereo Mind</span>
           </Link>
+          <UserNav />
         </div>
       </nav>
 
