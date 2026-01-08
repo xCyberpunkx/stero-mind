@@ -103,15 +103,27 @@ export default function SignupPage() {
             )}
 
             <motion.form variants={fadeIn} action={handleEmailSignUp} className="space-y-4 mb-8">
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
-                <Input
-                  type="text"
-                  name="full_name"
-                  placeholder="Full Name"
-                  required
-                  className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                />
+              <div className="flex gap-4">
+                <div className="relative w-full">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
+                  <Input
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    required
+                    className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                  />
+                </div>
+                <div className="relative w-full">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
+                  <Input
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    required
+                    className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                  />
+                </div>
               </div>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/50" />
@@ -163,19 +175,19 @@ export default function SignupPage() {
             <motion.div variants={fadeIn} className="flex flex-col gap-4">
               <Button
                 size="lg"
-                onClick={() => signInWithGoogle()}
-                className="w-full bg-white text-black hover:bg-black hover:text-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-14 text-base font-code font-bold transition-all flex items-center justify-center gap-3"
+                disabled
+                className="w-full bg-white text-black/50 border-2 border-black/20 rounded-none h-14 text-base font-code font-bold flex items-center justify-center gap-3 cursor-not-allowed"
               >
                 <Globe className="w-5 h-5" />
-                Google
+                Google (Coming Soon)
               </Button>
               <Button
                 size="lg"
-                onClick={() => signInWithGithub()}
-                className="w-full bg-white text-black hover:bg-black hover:text-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-14 text-base font-code font-bold transition-all flex items-center justify-center gap-3"
+                disabled
+                className="w-full bg-white text-black/50 border-2 border-black/20 rounded-none h-14 text-base font-code font-bold flex items-center justify-center gap-3 cursor-not-allowed"
               >
                 <Github className="w-5 h-5" />
-                GitHub
+                GitHub (Coming Soon)
               </Button>
             </motion.div>
 

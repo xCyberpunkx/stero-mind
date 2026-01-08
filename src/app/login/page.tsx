@@ -40,28 +40,28 @@ export default function LoginPage() {
   async function handleEmailSignIn(formData: FormData) {
     setIsLoading(true);
     setMessage(null);
-    
+
     const email = formData.get('email') as string;
-    
+
     if (rememberMe) {
       localStorage.setItem('rememberedEmail', email);
     } else {
       localStorage.removeItem('rememberedEmail');
     }
-    
+
     const result = await signInWithEmail(formData);
-    
+
     if (result?.error) {
       setMessage({ type: 'error', text: result.error });
     }
-    
+
     setIsLoading(false);
   }
 
   return (
     <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
       <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
-      
+
       <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
@@ -110,7 +110,7 @@ export default function LoginPage() {
             </motion.p>
 
             {message && (
-              <motion.div 
+              <motion.div
                 variants={fadeIn}
                 className={`mb-6 p-4 border-2 border-black ${message.type === 'success' ? 'bg-green-100' : 'bg-red-100'}`}
               >
@@ -147,7 +147,7 @@ export default function LoginPage() {
                   {showPassword ? <EyeOff className="w-5 h-5 text-black/50" /> : <Eye className="w-5 h-5 text-black/50" />}
                 </button>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -162,7 +162,7 @@ export default function LoginPage() {
                   Forgot password?
                 </Link>
               </div>
-              
+
               <Button
                 type="submit"
                 disabled={isLoading}
@@ -185,19 +185,19 @@ export default function LoginPage() {
             <motion.div variants={fadeIn} className="flex flex-col gap-4">
               <Button
                 size="lg"
-                onClick={() => signInWithGoogle()}
-                className="w-full bg-white text-black hover:bg-black hover:text-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-14 text-base font-code font-bold transition-all flex items-center justify-center gap-3"
+                disabled
+                className="w-full bg-white text-black/50 border-2 border-black/20 rounded-none h-14 text-base font-code font-bold flex items-center justify-center gap-3 cursor-not-allowed"
               >
                 <Globe className="w-5 h-5" />
-                Google
+                Google (Coming Soon)
               </Button>
               <Button
                 size="lg"
-                onClick={() => signInWithGithub()}
-                className="w-full bg-white text-black hover:bg-black hover:text-white border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-14 text-base font-code font-bold transition-all flex items-center justify-center gap-3"
+                disabled
+                className="w-full bg-white text-black/50 border-2 border-black/20 rounded-none h-14 text-base font-code font-bold flex items-center justify-center gap-3 cursor-not-allowed"
               >
                 <Github className="w-5 h-5" />
-                GitHub
+                GitHub (Coming Soon)
               </Button>
             </motion.div>
 

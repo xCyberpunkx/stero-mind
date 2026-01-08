@@ -40,8 +40,9 @@ export default async function DashboardPage() {
                         <p><strong>Last Sign In:</strong> {new Date(user.last_sign_in_at!).toLocaleString()}</p>
                         {profile && (
                             <>
+                                <p><strong>First Name:</strong> {profile.first_name || 'N/A'}</p>
+                                <p><strong>Last Name:</strong> {profile.last_name || 'N/A'}</p>
                                 <p><strong>Full Name:</strong> {profile.full_name || 'N/A'}</p>
-                                <p><strong>Username:</strong> {profile.username || 'N/A'}</p>
                             </>
                         )}
                     </div>
@@ -53,6 +54,6 @@ export default async function DashboardPage() {
                     <p className="font-code">Access Level: BETA_USER</p>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
