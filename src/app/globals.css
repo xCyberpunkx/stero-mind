@@ -51,6 +51,7 @@
 }
 
 :root {
+  scroll-behavior: smooth;
   --radius: 0px;
   --background: #ffffff;
   --foreground: #000000;

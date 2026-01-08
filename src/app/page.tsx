@@ -43,16 +43,16 @@ export default function Home() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 border-2 border-black bg-white flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 border-2 border-black bg-white flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
               <Radio className="w-6 h-6" />
             </div>
-            <span className="font-bold text-xl tracking-tighter uppercase font-code">Stereo Mind</span>
-          </div>
+            <span className="font-bold text-xl tracking-tighter uppercase font-code group-hover:tracking-normal transition-all">Stereo Mind</span>
+          </Link>
           <div className="hidden md:flex items-center gap-8 font-code text-sm font-medium">
-            <a href="#philosophy" className="hover:underline underline-offset-4">PHILOSOPHY</a>
-            <a href="#features" className="hover:underline underline-offset-4">SYSTEMS</a>
-            <a href="#open-source" className="hover:underline underline-offset-4">OPEN SOURCE</a>
+            <a href="#philosophy" className="hover:underline underline-offset-4 decoration-2 decoration-black">PHILOSOPHY</a>
+            <Link href="/whitepaper" className="hover:underline underline-offset-4 decoration-2 decoration-black">WHITEPAPER</Link>
+            <Link href="/roadmap" className="hover:underline underline-offset-4 decoration-2 decoration-black">ROADMAP</Link>
           </div>
           <UserNav />
         </div>
@@ -104,14 +104,16 @@ export default function Home() {
                     </Button>
                   </Link>
                 </div>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-secondary transition-all w-fit"
-                >
-                  Learn more
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </Button>
+                <Link href="/roadmap">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-black hover:text-white transition-all w-fit group"
+                  >
+                    Learn more
+                    <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
@@ -360,6 +362,7 @@ export default function Home() {
                   <span className="font-bold opacity-30 text-[10px] tracking-widest uppercase">Protocol</span>
                   <a href="#" className="hover:underline">Documentation</a>
                   <Link href="/whitepaper" className="hover:underline">Whitepaper</Link>
+                  <Link href="/roadmap" className="hover:underline">Roadmap</Link>
                   <a href="#" className="hover:underline">Open API</a>
                 </div>
                 <div className="flex flex-col gap-4">
