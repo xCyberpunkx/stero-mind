@@ -80,7 +80,7 @@ export async function signUpWithEmail(formData: FormData) {
     return { error: error.message }
   }
 
-  return { success: true, message: "Your account has been created! Thank you for joining—you'll be among the first to have access to the protocol." }
+  return { success: true, message: "Your account has been created! Please check your inbox to verify your email. Thank you for joining—you'll be among the first to have access to the protocol." }
 }
 
 export async function signInWithEmail(formData: FormData) {

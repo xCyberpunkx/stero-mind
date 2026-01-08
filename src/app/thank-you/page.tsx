@@ -34,7 +34,7 @@ export default function ThankYou() {
   return (
     <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
       <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
-      
+
       <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
@@ -60,7 +60,7 @@ export default function ThankYou() {
                 {loading ? <Loader2 className="w-10 h-10 animate-spin" /> : <CheckCircle2 className="w-10 h-10" />}
               </div>
             </div>
-            
+
             <h1
               className="text-5xl md:text-7xl font-bold mb-8 uppercase tracking-tighter leading-none"
               style={{ fontFamily: "var(--font-serif)" }}
@@ -72,10 +72,10 @@ export default function ThankYou() {
                 </>
               )}
             </h1>
-            
+
             <p className="text-xl md:text-2xl mb-12 font-medium max-w-2xl mx-auto">
-              {loading 
-                ? "Securing your spot in the cognitive architecture..." 
+              {loading
+                ? "Securing your spot in the cognitive architecture..."
                 : "Thank you for joining the waitlist. You'll be among the first to experience the evolution of human cognition when we launch the alpha."
               }
             </p>
@@ -90,7 +90,7 @@ export default function ThankYou() {
                     Return Home
                   </Button>
                 </Link>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
+                <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
                   <Button
                     variant="outline"
                     size="lg"

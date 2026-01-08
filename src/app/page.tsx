@@ -265,9 +265,11 @@ export default function Home() {
                   cannot be owned by a single corporation.
                 </p>
                 <div className="flex items-center gap-6">
-                  <Button className="ml-auto bg-black text-white hover:bg-secondary hover:text-black border-2 border-black rounded-none px-6 h-12 font-code font-bold uppercase">
-                    View Repository
-                  </Button>
+                  <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="ml-auto">
+                    <Button className="bg-black text-white hover:bg-secondary hover:text-black border-2 border-black rounded-none px-6 h-12 font-code font-bold uppercase">
+                      View Repository
+                    </Button>
+                  </a>
                 </div>
               </div>
               <div className="space-y-8">
@@ -327,13 +329,15 @@ export default function Home() {
               </Link>
             </div>
             <div className="mt-8">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full md:w-auto border-2 border-black bg-white rounded-none h-16 px-12 text-lg font-code font-bold hover:bg-secondary"
-              >
-                Read the Whitepaper
-              </Button>
+              <Link href="/whitepaper">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full md:w-auto border-2 border-black bg-white rounded-none h-16 px-12 text-lg font-code font-bold hover:bg-secondary"
+                >
+                  Read the Whitepaper
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </section>
@@ -355,12 +359,12 @@ export default function Home() {
                 <div className="flex flex-col gap-4">
                   <span className="font-bold opacity-30 text-[10px] tracking-widest uppercase">Protocol</span>
                   <a href="#" className="hover:underline">Documentation</a>
-                  <a href="#" className="hover:underline">Whitepaper</a>
+                  <Link href="/whitepaper" className="hover:underline">Whitepaper</Link>
                   <a href="#" className="hover:underline">Open API</a>
                 </div>
                 <div className="flex flex-col gap-4">
                   <span className="font-bold opacity-30 text-[10px] tracking-widest uppercase">Social</span>
-                  <a href="#" className="hover:underline">Github</a>
+                  <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="hover:underline">Github</a>
                   <a href="#" className="hover:underline">Discord</a>
                   <a href="#" className="hover:underline">Twitter</a>
                 </div>
