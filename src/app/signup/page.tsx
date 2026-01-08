@@ -141,9 +141,9 @@ export default function SignupPage() {
                 {message && (
                   <motion.div
                     variants={fadeIn}
-                    className="mb-6 p-4 border-2 border-black bg-red-100"
+                    className="mb-6 p-4 border-2 border-red-600 bg-red-50 text-red-600"
                   >
-                    <p className="font-code text-sm font-bold">{message.text}</p>
+                    <p className="font-code text-sm font-bold uppercase tracking-tight">(!) Error: {message.text}</p>
                   </motion.div>
                 )}
 

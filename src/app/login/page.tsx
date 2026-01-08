@@ -68,6 +68,10 @@ export default function LoginPage() {
         });
       }
     } catch (err) {
+      if (err instanceof Error && err.message === 'NEXT_REDIRECT') {
+        // Let Next.js handle the redirect
+        return;
+      }
       console.error("[Login] Fatal exception during sign-in:", err);
       const errorMessage = err instanceof Error ? err.message : "An unexpected error occurred. Please try again.";
       setMessage({ type: 'error', text: errorMessage });
@@ -133,9 +137,14 @@ export default function LoginPage() {
             {message && (
               <motion.div
                 variants={fadeIn}
-                className={`mb-6 p-4 border-2 border-black ${message.type === 'success' ? 'bg-green-100' : 'bg-red-100'}`}
+                className={`mb-6 p-4 border-2 ${message.type === 'success'
+                  ? 'border-green-600 bg-green-50 text-green-700'
+                  : 'border-red-600 bg-red-50 text-red-600'
+                  }`}
               >
-                <p className="font-code text-sm font-bold">{message.text}</p>
+                <p className="font-code text-sm font-bold uppercase tracking-tight">
+                  {message.type === 'error' ? '(!) Error: ' : ''}{message.text}
+                </p>
               </motion.div>
             )}
 
