@@ -80,20 +80,20 @@ export default function Home() {
 
               <motion.h1
                 variants={fadeIn}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
+                className="text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter mb-8 leading-[0.85] uppercase"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
-                Build your mind<br />
-                <span className="italic decoration-black underline underline-offset-8">like a system.</span>
+                Engineer your <br />
+                <span className="italic decoration-black underline underline-offset-[12px]">Cognitive Edge.</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeIn}
-                className="text-xl md:text-2xl text-black font-medium max-w-2xl mb-12 leading-tight"
+                className="text-xl md:text-3xl text-black font-medium max-w-3xl mb-12 leading-tight"
               >
-                Stereo Mind is an ambitious, open-source knowledge architecture.
-                It's not an app; it's a personal infrastructure for tracking learning,
-                visualizing cognition, and engineering a systematic life.
+                The high-performance operating system for your mind.
+                Track neural logs, engineer tasks, and visualize your progress
+                with absolute clarity.
               </motion.p>
 
               <motion.div variants={fadeIn} className="flex flex-col gap-6">

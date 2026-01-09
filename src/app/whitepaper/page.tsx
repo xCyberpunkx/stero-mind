@@ -102,10 +102,10 @@ export default function WhitepaperPage() {
                             <div className="border-2 border-black p-6">
                                 <h3 className="font-bold uppercase mb-4 font-code text-sm underline">2.1 Core Modules (MVP)</h3>
                                 <ul className="space-y-4 text-sm">
-                                    <li><strong>Knowledge / Study:</strong> High-granularity tracking with metadata and notes.</li>
-                                    <li><strong>Projects / Goals:</strong> Organize learning into logical clusters.</li>
-                                    <li><strong>Charts & Dashboards:</strong> Visualize hours, streaks, trends, and patterns.</li>
-                                    <li><strong>Gamification:</strong> XP, levels, and streaks for consistent engagement.</li>
+                                    <li><strong>Neuro-Logging:</strong> Capture thoughts and learning logs with XP rewards.</li>
+                                    <li><strong>Task Engineering:</strong> Synchronized task management system.</li>
+                                    <li><strong>Goals & Milestones:</strong> Track high-granularity objectives and deadlines.</li>
+                                    <li><strong>Visual Architecture:</strong> Real-time charts and temporal maps.</li>
                                 </ul>
                             </div>
                             <div className="border-2 border-black p-6 bg-secondary/10">
