@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Radio, Brain, Rocket, Tool, Target, CheckCircle2, Loader2, User } from "lucide-react";
+import { Radio, Brain, Rocket, Wrench, Target, CheckCircle2, Loader2, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { completeOnboarding } from "./actions";

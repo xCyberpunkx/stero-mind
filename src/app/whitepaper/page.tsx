@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowLeft, Radio, Github, Globe, Share2, BookOpen, Brain, Activity, Clock, CheckCircle2, Layers, Calendar } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowLeft, Radio, Github, Share2, Brain, CheckCircle2, Layers, Clock, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const fadeIn = {
@@ -57,89 +57,98 @@ export default function WhitepaperPage() {
                             <span className="italic decoration-black underline underline-offset-8">Cognitive OS</span>
                         </h1>
                         <p className="font-code text-sm font-bold opacity-60 mt-8">
-                            v0.1.0-alpha – Open Source Protocol for High-Fidelity Knowledge Engineering <br />
-                            “Engineer your mind like a system.”
+                            v0.1.0-alpha – Open Source Protocol for Intentional Growth <br />
+                            “Engineer your mind like a high-fidelity system.”
                         </p>
                     </motion.div>
 
                     <motion.section variants={fadeIn} className="mb-12 prose prose-slate max-w-none">
                         <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">Abstract</h2>
                         <p className="text-lg leading-relaxed mb-6">
-                            Stereo Mind is a personal infrastructure designed for systematic human growth. Unlike traditional productivity tools that focus on shallow task completion, Stereo Mind emphasizes the capture of high-fidelity cognitive data—learning sessions, project reflections, and neural logs—to create a compounding asset of knowledge and skill.
+                            Stereo Mind is a cognitive infrastructure designed to replace fragmented productivity tools with a unified data structure for human growth. By treating neural output as system data, we enable high-fidelity tracking of the learning process.
+                        </p>
+                        <p className="text-lg leading-relaxed">
+                            This document outlines the current alpha implementation of the Stereo Protocol, focusing on the three core pillars: **Project Clusters**, **Task Queues**, and **Neuro-Logging**.
                         </p>
                     </motion.section>
 
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">1. Core Architecture</h2>
-                        <p className="mb-6 opacity-80">The system is built on four primary vectors of cognitive management:</p>
-                        
-                        <div className="grid gap-6 mb-8">
-                            {[
-                                {
-                                    title: "Neuro-Logging",
-                                    icon: Brain,
-                                    desc: "High-granularity session reflections that capture cognitive states (Focused, Flow, Scattered, Exhausted). This data allows for the identification of optimal learning patterns."
-                                },
-                                {
-                                    title: "Task Queue Engine",
-                                    icon: CheckCircle2,
-                                    desc: "A priority-based execution system that links atomic tasks directly to large-scale Project Clusters, ensuring every action contributes to a broader strategic objective."
-                                },
-                                {
-                                    title: "Project Clusters",
-                                    icon: Layers,
-                                    desc: "Hierarchical organization for multi-year deep work. Clusters serve as the 'containers' for all tasks and logs related to a specific domain of mastery."
-                                },
-                                {
-                                    title: "Flow Tracker",
-                                    icon: Clock,
-                                    desc: "Real-time temporal monitoring that correlates time-on-task with cognitive output, providing a raw metric for 'Deep Work' sessions."
-                                }
-                            ].map((v, i) => (
-                                <div key={i} className="border-2 border-black p-6 bg-white flex gap-6">
-                                    <div className="w-12 h-12 border-2 border-black flex items-center justify-center shrink-0 bg-secondary">
-                                        <v.icon className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold uppercase font-code mb-2">{v.title}</h3>
-                                        <p className="text-sm opacity-70">{v.desc}</p>
-                                    </div>
+                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">1. The Three Pillars</h2>
+                        <div className="grid grid-cols-1 gap-6 mb-8">
+                            <div className="border-2 border-black p-6 bg-blue-50/50">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <Brain className="w-6 h-6" />
+                                    <h3 className="font-bold uppercase font-code">Pillar I: Neuro-Logging</h3>
                                 </div>
-                            ))}
-                        </div>
-                    </motion.section>
-
-                    <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">2. Technical Implementation</h2>
-                        <div className="bg-black text-white p-8 font-code text-xs overflow-x-auto rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] mb-8">
-                            {`[DATABASE]   : Supabase (PostgreSQL) - Real-time relational persistence.
-[INTERFACE]  : Next.js (App Router) - High-performance server-side rendering.
-[ACTIONS]    : Secure Server Actions - Optimized for CRUD performance.
-[AESTHETIC]  : High-Fidelity Brutalism - Designed for clarity and focus.`}
-                        </div>
-                        <p className="text-sm opacity-80 leading-relaxed">
-                            Every module in Stereo Mind is designed for data sovereignty. Users maintain full control over their cognitive datasets, which are exportable and structured for future AI-driven analysis of personal growth patterns.
-                        </p>
-                    </motion.section>
-
-                    <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">3. The Temporal Vector</h2>
-                        <div className="border-2 border-black p-8 bg-secondary/10 mb-6">
-                            <div className="flex items-center gap-4 mb-4">
-                                <Calendar className="w-6 h-6" />
-                                <h3 className="font-bold uppercase font-code text-sm underline">Correlating Time and Thought</h3>
+                                <p className="text-sm leading-relaxed">
+                                    Moving beyond simple note-taking, Neuro-Logs capture the cognitive state (mood, duration, intensity) of a session. This creates a temporal vector of your learning process, allowing for retrospectives based on state-of-mind rather than just content.
+                                </p>
                             </div>
-                            <p className="text-sm opacity-80">
-                                The Temporal Vector (Calendar) view provides a visual timeline of cognitive output. By correlating tasks, logs, and sessions on a daily grid, the system identifies "Cognitive Spikes"—periods of maximum efficiency—and helps users engineer their environment to repeat these states.
-                            </p>
+                            <div className="border-2 border-black p-6 bg-green-50/50">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <CheckCircle2 className="w-6 h-6" />
+                                    <h3 className="font-bold uppercase font-code">Pillar II: Task Queue</h3>
+                                </div>
+                                <p className="text-sm leading-relaxed">
+                                    A priority-based execution engine. Tasks in Stereo Mind are not just items to check off; they are nodes in a larger project cluster, ensuring that every micro-action contributes to a macro-objective.
+                                </p>
+                            </div>
+                            <div className="border-2 border-black p-6 bg-purple-50/50">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <Layers className="w-6 h-6" />
+                                    <h3 className="font-bold uppercase font-code">Pillar III: Project Clusters</h3>
+                                    <span className="ml-auto text-[10px] font-bold border border-black px-1.5 py-0.5 uppercase">Core Structure</span>
+                                </div>
+                                <p className="text-sm leading-relaxed">
+                                    Hierarchical organization for multi-year deep work. Clusters aggregate tasks and logs into high-level domains (e.g., "Knowledge Engineering", "System Architecture"), preventing context fragmentation.
+                                </p>
+                            </div>
+                        </div>
+                    </motion.section>
+
+                    <motion.section variants={fadeIn} className="mb-12">
+                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">2. Technical Stack</h2>
+                        <p className="mb-6 opacity-70">The alpha protocol is built on a resilient, modern stack ensuring data sovereignty and high performance.</p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="border-2 border-black p-4 font-code text-[10px] space-y-2">
+                                <div className="font-bold underline mb-2 uppercase">Core Engine</div>
+                                <div className="flex justify-between"><span>Framework:</span> <span>Next.js 15 (Turbopack)</span></div>
+                                <div className="flex justify-between"><span>Backend:</span> <span>Supabase (PostgreSQL)</span></div>
+                                <div className="flex justify-between"><span>Auth:</span> <span>Supabase Auth</span></div>
+                            </div>
+                            <div className="border-2 border-black p-4 font-code text-[10px] space-y-2 bg-secondary/10">
+                                <div className="font-bold underline mb-2 uppercase">Data Layer</div>
+                                <div className="flex justify-between"><span>Storage:</span> <span>Row-Level Security</span></div>
+                                <div className="flex justify-between"><span>Actions:</span> <span>Next.js Server Actions</span></div>
+                                <div className="flex justify-between"><span>Sync:</span> <span>Real-time DB Polling</span></div>
+                            </div>
+                        </div>
+                    </motion.section>
+
+                    <motion.section variants={fadeIn} className="mb-12">
+                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">3. Future Vector: Analytic Engine</h2>
+                        <div className="border-2 border-black p-8 bg-black text-white relative overflow-hidden">
+                            <div className="absolute inset-0 bg-grid invert opacity-10 pointer-events-none" />
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <Activity className="w-10 h-10 text-green-400 animate-pulse" />
+                                    <h3 className="font-bold text-xl uppercase">Cognitive Visualization</h3>
+                                </div>
+                                <p className="text-sm opacity-80 leading-relaxed mb-6">
+                                    The next phase involves converting accumulated logs and session data into visual cognitive maps. Using D3.js, we will visualize your learning plateaus, focus spikes, and domain mastery over time.
+                                </p>
+                                <div className="font-code text-[10px] tracking-widest opacity-50 uppercase">
+                                    Status: Researching Vector Algorithms // SM-ALPHA-ANALYTICS
+                                </div>
+                            </div>
                         </div>
                     </motion.section>
 
                     <motion.section variants={fadeIn} className="mb-12 text-center py-12 border-t-2 border-black">
-                        <h2 className="text-3xl font-bold uppercase mb-8 tracking-tighter">Initialize Protocol</h2>
+                        <h2 className="text-2xl font-bold uppercase mb-8">Ready to engineer your cognition?</h2>
                         <Link href="/signup">
                             <Button size="lg" className="bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] px-12 h-16 font-code font-bold text-lg transition-all">
-                                JOIN_ALPHA_PROTOCOL
+                                BOOT_SYSTEM_ALPHA
                             </Button>
                         </Link>
                     </motion.section>
@@ -147,14 +156,8 @@ export default function WhitepaperPage() {
                     <footer className="pt-8 border-t-2 border-black flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold font-code opacity-50 uppercase tracking-widest">
                         <div>STEREO MIND PROTOCOL // SM-001-ALPHA</div>
                         <div className="flex gap-6">
-                            <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="hover:underline flex items-center gap-2">
-                                <Github className="w-3 h-3" />
-                                REPOSITORY
-                            </a>
-                            <a href="#" className="hover:underline flex items-center gap-2">
-                                <Share2 className="w-3 h-3" />
-                                SHARE
-                            </a>
+                            <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="hover:underline">Github</a>
+                            <Share2 className="w-3 h-3" />
                         </div>
                     </footer>
                 </motion.div>
