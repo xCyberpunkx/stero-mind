@@ -21,18 +21,14 @@ const nextConfig: NextConfig = {
   turbopack: process.env.VERCEL
     ? {} // empty on Vercel
     : {
-        rules: {
-          "*.{jsx,tsx}": {
-            loaders: [LOADER],
-          },
+      rules: {
+        "*.{jsx,tsx}": {
+          loaders: [LOADER],
         },
       },
+    },
   // remove outputFileTracingRoot for Vercel, Next.js handles it automatically
 };
 
 export default nextConfig;
-<<<<<<< Updated upstream
 // Orchids restart: 1767968305117
-=======
-// Orchids restart: 1767961642794
->>>>>>> Stashed changes

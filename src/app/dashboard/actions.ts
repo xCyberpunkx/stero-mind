@@ -67,6 +67,14 @@ export async function createNeuroLog(formData: FormData) {
   revalidatePath('/dashboard')
 }
 
+export async function deleteNeuroLog(id: string) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('neuro_logs').delete().eq('id', id)
+
+  if (error) throw error
+  revalidatePath('/dashboard')
+}
+
 export async function startSession(projectId: string) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -85,7 +93,7 @@ export async function startSession(projectId: string) {
 
 export async function stopSession(sessionId: string) {
   const supabase = await createClient()
-  
+
   const { data: session } = await supabase.from('sessions').select('start_time').eq('id', sessionId).single()
   if (!session) return
 
