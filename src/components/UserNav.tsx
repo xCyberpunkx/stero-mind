@@ -35,10 +35,10 @@ export function UserNav() {
   if (user) {
     return (
       <div className="flex items-center gap-4">
-        <Link href="/thank-you">
+        <Link href="/dashboard">
           <Button variant="ghost" className="font-code text-xs font-bold uppercase flex items-center gap-2">
             <UserIcon className="w-4 h-4" />
-            Profile
+            Dashboard
           </Button>
         </Link>
         <form action={signOut}>

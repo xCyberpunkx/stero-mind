@@ -20,7 +20,7 @@
 # production
 /build
 #env
-.env.local
+# .env.local # Removed by Orchids to allow .env files
 # misc
 .DS_Store
 *.pem
