@@ -58,39 +58,40 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="relative pt-32">
+      <main className="relative pt-32 pb-24">
         {/* Hero Section */}
-        <section className="px-6 pb-24">
-          <div className="max-w-6xl mx-auto border-2 border-black bg-white p-8 md:p-16 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <section className="px-6 pb-24 md:pb-40">
+          <div className="max-w-6xl mx-auto border-4 border-black bg-white p-8 md:p-20 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
             <motion.div
               initial="initial"
               animate="animate"
               variants={stagger}
               className="max-w-4xl"
             >
-              <motion.div variants={fadeIn} className="mb-8">
-                <span className="inline-block border-2 border-black px-4 py-1 font-code text-xs font-bold bg-secondary uppercase tracking-widest">
+              <motion.div variants={fadeIn} className="mb-10">
+                <span className="inline-block border-2 border-black px-4 py-2 font-code text-[10px] font-bold bg-secondary uppercase tracking-[0.3em]">
                   v0.1.0-alpha // Open Source Protocol
                 </span>
               </motion.div>
 
               <motion.h1
                 variants={fadeIn}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
+                className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-10 leading-[0.85] uppercase"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
                 Build your mind<br />
-                <span className="italic decoration-black underline underline-offset-8">like a system.</span>
+                <span className="italic decoration-black underline underline-offset-[12px]">like a system.</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeIn}
-                className="text-xl md:text-2xl text-black font-medium max-w-2xl mb-12 leading-tight"
+                className="text-xl md:text-3xl text-black font-medium max-w-2xl mb-16 leading-tight opacity-90"
               >
                 Stereo Mind is an ambitious, open-source knowledge architecture.
                 It's not an app; it's a personal infrastructure for tracking learning,
                 visualizing cognition, and engineering a systematic life.
               </motion.p>
+
 
               <motion.div variants={fadeIn} className="flex flex-col gap-6">
                 <div className="flex flex-col sm:flex-row gap-4">

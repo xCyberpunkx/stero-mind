@@ -152,7 +152,6 @@ export default function ResetPasswordPage() {
                   placeholder="New password (min 6 characters)"
                   required
                   minLength={6}
-                  autoComplete="new-password"
                   className="w-full h-14 pl-12 pr-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 />
                 <button
@@ -172,7 +171,6 @@ export default function ResetPasswordPage() {
                   placeholder="Confirm new password"
                   required
                   minLength={6}
-                  autoComplete="new-password"
                   className="w-full h-14 pl-12 pr-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 />
                 <button

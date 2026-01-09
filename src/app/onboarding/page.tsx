@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Radio, Brain, Rocket, Target, CheckCircle2, Loader2, User } from "lucide-react";
+import { Radio, Brain, Rocket, Tool, Target, CheckCircle2, Loader2, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { completeOnboarding } from "./actions";
@@ -34,7 +34,7 @@ export default function OnboardingPage() {
 
   async function handleSubmit(formData: FormData) {
     setIsLoading(true);
-
+    
     // Add arrays to formData since they are not native form inputs in this UI
     selectedInterests.forEach(interest => formData.append('interests', interest));
     selectedTools.forEach(tool => formData.append('tools', tool));
@@ -93,7 +93,6 @@ export default function OnboardingPage() {
                     name="username"
                     placeholder="CHOOSE YOUR SYSTEM NAME"
                     required
-                    autoComplete="username"
                     className="w-full h-16 border-2 border-black rounded-none font-code text-lg focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                   />
                 </div>
@@ -111,10 +110,11 @@ export default function OnboardingPage() {
                       key={interest}
                       type="button"
                       onClick={() => toggleSelection(interest, selectedInterests, setSelectedInterests)}
-                      className={`px-6 py-3 border-2 border-black font-code font-bold text-xs uppercase transition-all flex items-center gap-2 ${selectedInterests.includes(interest)
-                        ? "bg-black text-white shadow-none translate-x-[2px] translate-y-[2px]"
-                        : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
-                        }`}
+                      className={`px-6 py-3 border-2 border-black font-code font-bold text-xs uppercase transition-all flex items-center gap-2 ${
+                        selectedInterests.includes(interest)
+                          ? "bg-black text-white shadow-none translate-x-[2px] translate-y-[2px]"
+                          : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
+                      }`}
                     >
                       {selectedInterests.includes(interest) && <CheckCircle2 className="w-4 h-4" />}
                       {interest}
@@ -135,10 +135,11 @@ export default function OnboardingPage() {
                       key={tool}
                       type="button"
                       onClick={() => toggleSelection(tool, selectedTools, setSelectedTools)}
-                      className={`px-6 py-3 border-2 border-black font-code font-bold text-xs uppercase transition-all flex items-center gap-2 ${selectedTools.includes(tool)
-                        ? "bg-black text-white shadow-none translate-x-[2px] translate-y-[2px]"
-                        : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
-                        }`}
+                      className={`px-6 py-3 border-2 border-black font-code font-bold text-xs uppercase transition-all flex items-center gap-2 ${
+                        selectedTools.includes(tool)
+                          ? "bg-black text-white shadow-none translate-x-[2px] translate-y-[2px]"
+                          : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
+                      }`}
                     >
                       {selectedTools.includes(tool) && <CheckCircle2 className="w-4 h-4" />}
                       {tool}
@@ -159,10 +160,11 @@ export default function OnboardingPage() {
                       key={goal}
                       type="button"
                       onClick={() => setSelectedGoal(goal)}
-                      className={`px-4 py-3 border-2 border-black font-code font-bold text-[10px] uppercase transition-all ${selectedGoal === goal
-                        ? "bg-secondary text-black shadow-none translate-x-[2px] translate-y-[2px]"
-                        : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
-                        }`}
+                      className={`px-4 py-3 border-2 border-black font-code font-bold text-[10px] uppercase transition-all ${
+                        selectedGoal === goal
+                          ? "bg-secondary text-black shadow-none translate-x-[2px] translate-y-[2px]"
+                          : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
+                      }`}
                     >
                       {goal}
                     </button>

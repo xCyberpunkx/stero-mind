@@ -156,7 +156,6 @@ export default function SignupPage() {
                         name="first_name"
                         placeholder="First Name"
                         required
-                        autoComplete="given-name"
                         className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                       />
                     </div>
@@ -167,7 +166,6 @@ export default function SignupPage() {
                         name="last_name"
                         placeholder="Last Name"
                         required
-                        autoComplete="family-name"
                         className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                       />
                     </div>
@@ -179,7 +177,6 @@ export default function SignupPage() {
                       name="email"
                       placeholder="Email address"
                       required
-                      autoComplete="email"
                       className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                     />
                   </div>
@@ -191,7 +188,6 @@ export default function SignupPage() {
                       placeholder="Password (min 6 characters)"
                       required
                       minLength={6}
-                      autoComplete="new-password"
                       className="w-full h-14 pl-12 pr-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                     />
                     <button
