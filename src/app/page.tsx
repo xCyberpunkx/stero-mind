@@ -79,17 +79,17 @@ export default function Home() {
                 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
-                Master your<br />
-                <span className="italic decoration-black underline underline-offset-8">daily growth.</span>
+                Build your mind<br />
+                <span className="italic decoration-black underline underline-offset-8">like a system.</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeIn}
                 className="text-xl md:text-2xl text-black font-medium max-w-2xl mb-12 leading-tight"
               >
-                Stereo Mind is an open-source workspace for your life.
-                Track your learning, visualize your ideas, and build
-                better habits—all in one place.
+                Stereo Mind is an ambitious, open-source knowledge architecture.
+                It's not an app; it's a personal infrastructure for tracking learning,
+                visualizing cognition, and engineering a systematic life.
               </motion.p>
 
               <motion.div variants={fadeIn} className="flex flex-col gap-6">
@@ -126,21 +126,21 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl md:text-6xl font-bold uppercase mb-8 leading-none" style={{ fontFamily: "var(--font-serif)" }}>
-                  The Philosophy of <br />Human Growth
+                  The Philosophy of <br />Stereo Cognition
                 </h2>
                 <div className="space-y-6 text-lg md:text-xl font-light opacity-80">
                   <p>
-                    Most tools treat your brain like a to-do list.
-                    We treat it like a system that needs the right input to thrive.
+                    Most tools treat your brain like a garbage bin for tasks.
+                    We treat it like a high-fidelity processor.
                   </p>
                   <p>
-                    Stereo Mind is built on the idea that what you measure, you improve.
-                    By tracking how you learn and work, you turn your daily effort into
-                    a better version of yourself.
+                    Stereo Mind is built on the principle of "Intentional Feedback Loops."
+                    By measuring the learning process—not just the result—you create
+                    a compounding asset: your own mind.
                   </p>
                   <p className="font-code text-sm border-l-4 border-white pl-6 py-2">
-                    // MISSION: To give everyone a simple,
-                  // private, and powerful way to grow.
+                    // MISSION: To provide the world with a transparent,
+                  // sovereign, and extensible system for human growth.
                   </p>
                 </div>
               </div>
@@ -177,57 +177,57 @@ export default function Home() {
               {[
                 {
                   icon: Terminal,
-                  title: "Session Logs",
-                  desc: "Keep a daily journal of your work and learning sessions with easy markdown notes.",
-                  tags: ["JOURNAL", "MARKDOWN"],
+                  title: "Neuro-Logging",
+                  desc: "High-granularity session tracking with markdown support and technical metadata.",
+                  tags: ["LOCAL-FIRST", "JSON-EXPORT"],
                 },
                 {
                   icon: Network,
-                  title: "Idea Maps",
-                  desc: "Visualize how your thoughts and projects connect. See the big picture of your life.",
-                  tags: ["VISUAL", "GRAPH"],
+                  title: "Knowledge Graphs",
+                  desc: "Visual links between disparate topics. See how your philosophy affects your code.",
+                  tags: ["3D-RENDER", "WEBGL"],
                 },
                 {
                   icon: LineChart,
-                  title: "Progress Tracking",
-                  desc: "Detailed charts help you see your growth over time and stay motivated.",
-                  tags: ["CHARTS", "DATA"],
+                  title: "Analytic Engine",
+                  desc: "Dozens of chart types to analyze your cognitive peaks and learning plateaus.",
+                  tags: ["D3.JS", "PRECISE"],
                 },
                 {
                   icon: Cpu,
-                  title: "Skill Growth",
-                  desc: "Level up your skills like a character in a game. Track your mastery and progress.",
-                  tags: ["SKILLS", "MASTERY"],
+                  title: "Skill Engineering",
+                  desc: "Treat skills like software dependencies. Track versions, depth, and mastery.",
+                  tags: ["SYSTEMS", "ALGORITHMIC"],
                 },
                 {
                   icon: Layers,
-                  title: "Project Folders",
-                  desc: "Organize your big goals into simple folders. Focus on what matters right now.",
-                  tags: ["ORGANIZED"],
+                  title: "Project Clusters",
+                  desc: "Group deep work into logical clusters. Track complex, multi-year endeavors.",
+                  tags: ["HIERARCHICAL"],
                 },
                 {
                   icon: Code,
-                  title: "Easy Integration",
-                  desc: "Connect your favorite tools and data sources to build your own custom system.",
-                  tags: ["API", "CONNECT"],
+                  title: "Open API",
+                  desc: "Everything is extensible. Hook into your health data, bank, or IDE.",
+                  tags: ["REST", "GRAPHQL"],
                 },
                 {
                   icon: Database,
-                  title: "You Own Your Data",
-                  desc: "Your data is private and belongs to you. Export or move it whenever you want.",
-                  tags: ["PRIVATE"],
+                  title: "Data Sovereignty",
+                  desc: "Your data belongs to you. Export to any format or host it yourself.",
+                  tags: ["ENCRYPTED"],
                 },
                 {
                   icon: Share2,
-                  title: "Learning Groups",
-                  desc: "Join teams to learn together and share progress without the stress of competition.",
-                  tags: ["SOCIAL"],
+                  title: "Collaborative XP",
+                  desc: "Join learning squads. Compare systems without the toxic competition.",
+                  tags: ["SOCIAL", "GAMIFIED"],
                 },
                 {
                   icon: Layout,
-                  title: "Custom Workspace",
-                  desc: "Design your own dashboard with simple drag-and-drop widgets that you love.",
-                  tags: ["MODULAR"],
+                  title: "Custom Dashboards",
+                  desc: "Drag-and-drop your own cognitive command center. Modular by design.",
+                  tags: ["FLEXIBLE"],
                 },
               ].map((feature, i) => (
                 <div
