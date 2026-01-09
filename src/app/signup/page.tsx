@@ -200,18 +200,11 @@ export default function SignupPage() {
                   </div>
                   <Button
                     type="submit"
-                    disabled={isLoading}
+                    isLoading={isLoading}
                     size="lg"
                     className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
                   >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="w-6 h-6 animate-spin" />
-                        Initializing Protocol...
-                      </>
-                    ) : (
-                      "Create Account"
-                    )}
+                    {isLoading ? "Initializing Protocol..." : "Create Account"}
                   </Button>
                 </motion.form>
               </>
