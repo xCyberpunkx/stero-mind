@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Radio, Github, Share2, Brain, CheckCircle2, Layers, Clock, Activity } from "lucide-react";
+import { ArrowLeft, Radio, Github, Globe, Share2 } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const fadeIn = {
@@ -58,97 +58,123 @@ export default function WhitepaperPage() {
                         </h1>
                         <p className="font-code text-sm font-bold opacity-60 mt-8">
                             v0.1.0-alpha – Open Source Protocol for Intentional Growth <br />
-                            “Engineer your mind like a high-fidelity system.”
+                            “Build your mind like a system.”
                         </p>
                     </motion.div>
 
                     <motion.section variants={fadeIn} className="mb-12 prose prose-slate max-w-none">
                         <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">Abstract</h2>
                         <p className="text-lg leading-relaxed mb-6">
-                            Stereo Mind is a cognitive infrastructure designed to replace fragmented productivity tools with a unified data structure for human growth. By treating neural output as system data, we enable high-fidelity tracking of the learning process.
+                            Traditional productivity tools treat the brain like a passive container for tasks. Stereo Mind treats it like a high-fidelity processor, providing a unified cognitive infrastructure to track learning, visualize cognition, and engineer intentional growth.
                         </p>
                         <p className="text-lg leading-relaxed">
-                            This document outlines the current alpha implementation of the Stereo Protocol, focusing on the three core pillars: **Project Clusters**, **Task Queues**, and **Neuro-Logging**.
+                            By capturing sessions, projects, and reflections, users create a compounding asset: their own mind. This whitepaper describes the architecture, modules, and roadmap of Stereo Mind — a system built for the hyper-learner.
                         </p>
                     </motion.section>
 
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">1. The Three Pillars</h2>
-                        <div className="grid grid-cols-1 gap-6 mb-8">
-                            <div className="border-2 border-black p-6 bg-blue-50/50">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <Brain className="w-6 h-6" />
-                                    <h3 className="font-bold uppercase font-code">Pillar I: Neuro-Logging</h3>
-                                </div>
-                                <p className="text-sm leading-relaxed">
-                                    Moving beyond simple note-taking, Neuro-Logs capture the cognitive state (mood, duration, intensity) of a session. This creates a temporal vector of your learning process, allowing for retrospectives based on state-of-mind rather than just content.
-                                </p>
-                            </div>
-                            <div className="border-2 border-black p-6 bg-green-50/50">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <CheckCircle2 className="w-6 h-6" />
-                                    <h3 className="font-bold uppercase font-code">Pillar II: Task Queue</h3>
-                                </div>
-                                <p className="text-sm leading-relaxed">
-                                    A priority-based execution engine. Tasks in Stereo Mind are not just items to check off; they are nodes in a larger project cluster, ensuring that every micro-action contributes to a macro-objective.
-                                </p>
-                            </div>
-                            <div className="border-2 border-black p-6 bg-purple-50/50">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <Layers className="w-6 h-6" />
-                                    <h3 className="font-bold uppercase font-code">Pillar III: Project Clusters</h3>
-                                    <span className="ml-auto text-[10px] font-bold border border-black px-1.5 py-0.5 uppercase">Core Structure</span>
-                                </div>
-                                <p className="text-sm leading-relaxed">
-                                    Hierarchical organization for multi-year deep work. Clusters aggregate tasks and logs into high-level domains (e.g., "Knowledge Engineering", "System Architecture"), preventing context fragmentation.
-                                </p>
-                            </div>
+                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">1. Introduction: Philosophy of Stereo Cognition</h2>
+                        <div className="bg-secondary/20 p-6 border-2 border-black mb-6 font-code text-sm">
+                            <p className="mb-4">// Status: Active Research Phase</p>
+                            <p>Most systems reduce the brain to a garbage bin for tasks. Stereo Mind treats it as an intentional processor.</p>
+                        </div>
+                        <p className="mb-6 font-bold uppercase tracking-tight text-sm opacity-60">Existing tools fail to:</p>
+                        <ul className="list-disc pl-6 mb-8 space-y-2">
+                            <li>Measure the learning process, not just outcomes</li>
+                            <li>Provide visual feedback on cognitive growth</li>
+                            <li>Encourage modular, extensible, self-directed improvement</li>
+                        </ul>
+                        <p className="mb-6 font-bold uppercase tracking-tight text-sm opacity-60">Stereo Mind solves this with:</p>
+                        <ul className="list-disc pl-6 mb-8 space-y-2">
+                            <li>Session-based learning tracking</li>
+                            <li>Project/goal organization for deep work</li>
+                            <li>Interactive dashboards for insight and reflection</li>
+                            <li>Optional gamification for motivation and engagement</li>
+                        </ul>
+                        <div className="border-2 border-black p-4 bg-black text-white font-code text-xs">
+                            MISSION: To provide a transparent, sovereign, and extensible system for human cognitive growth.
                         </div>
                     </motion.section>
 
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">2. Technical Stack</h2>
-                        <p className="mb-6 opacity-70">The alpha protocol is built on a resilient, modern stack ensuring data sovereignty and high performance.</p>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <div className="border-2 border-black p-4 font-code text-[10px] space-y-2">
-                                <div className="font-bold underline mb-2 uppercase">Core Engine</div>
-                                <div className="flex justify-between"><span>Framework:</span> <span>Next.js 15 (Turbopack)</span></div>
-                                <div className="flex justify-between"><span>Backend:</span> <span>Supabase (PostgreSQL)</span></div>
-                                <div className="flex justify-between"><span>Auth:</span> <span>Supabase Auth</span></div>
+                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">2. System Overview</h2>
+                        <div className="grid md:grid-cols-2 gap-8 mb-8">
+                            <div className="border-2 border-black p-6">
+                                <h3 className="font-bold uppercase mb-4 font-code text-sm underline">2.1 Core Modules (Live)</h3>
+                                <ul className="space-y-4 text-sm">
+                                    <li><strong>Neuro-Logging:</strong> Capture high-granularity session reflections with cognitive state metadata.</li>
+                                    <li><strong>Task Queue:</strong> Priority-based execution engine linked directly to project clusters.</li>
+                                    <li><strong>Project Clusters:</strong> Hierarchical organization for multi-year deep work and skill engineering.</li>
+                                    <li><strong>Flow Tracker:</strong> Real-time monitoring of session duration and cognitive output.</li>
+                                </ul>
                             </div>
-                            <div className="border-2 border-black p-4 font-code text-[10px] space-y-2 bg-secondary/10">
-                                <div className="font-bold underline mb-2 uppercase">Data Layer</div>
-                                <div className="flex justify-between"><span>Storage:</span> <span>Row-Level Security</span></div>
-                                <div className="flex justify-between"><span>Actions:</span> <span>Next.js Server Actions</span></div>
-                                <div className="flex justify-between"><span>Sync:</span> <span>Real-time DB Polling</span></div>
+                            <div className="border-2 border-black p-6 bg-secondary/10">
+                                <h3 className="font-bold uppercase mb-4 font-code text-sm underline">Coming Soon</h3>
+                                <ul className="space-y-4 text-sm italic opacity-80">
+                                    <li><strong>Temporal Vector:</strong> Visual cognitive timeline for long-term correlation.</li>
+                                    <li><strong>Analytic Engine:</strong> D3-powered visualization of learning plateaus.</li>
+                                    <li>Social Synchronization (Peer-to-peer growth)</li>
+                                    <li>Neural API (Third-party data ingestion)</li>
+                                </ul>
                             </div>
+                        </div>
+
+                        <h3 className="font-bold uppercase mb-4 font-code text-sm underline">2.2 Technical Stack</h3>
+                        <div className="font-code text-xs bg-black text-white p-8 overflow-x-auto whitespace-pre rounded-sm">
+                            {`[FRONTEND] : Next.js 15 (App Router, Turbopack)
+[BACKEND]  : Supabase (Auth, PostgreSQL, Realtime)
+[STYLE]    : Tailwind CSS + Lucide Icons
+[MOTION]   : Framer Motion
+[DATA]     : Server Actions + Persistence Layer`}
                         </div>
                     </motion.section>
 
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">3. Future Vector: Analytic Engine</h2>
-                        <div className="border-2 border-black p-8 bg-black text-white relative overflow-hidden">
-                            <div className="absolute inset-0 bg-grid invert opacity-10 pointer-events-none" />
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <Activity className="w-10 h-10 text-green-400 animate-pulse" />
-                                    <h3 className="font-bold text-xl uppercase">Cognitive Visualization</h3>
+                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">3. Principles & Design Philosophy</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-code text-xs uppercase font-bold">
+                            {[
+                                "Tight Feedback Loops",
+                                "Extensible Architecture",
+                                "Data Sovereignty",
+                                "Intentional Input",
+                                "Visual Clarity",
+                                "Open Source Ethos"
+                            ].map((p, i) => (
+                                <div key={i} className="border-2 border-black p-3 flex items-center gap-3">
+                                    <div className="w-2 h-2 bg-black rounded-full" />
+                                    {p}
                                 </div>
-                                <p className="text-sm opacity-80 leading-relaxed mb-6">
-                                    The next phase involves converting accumulated logs and session data into visual cognitive maps. Using D3.js, we will visualize your learning plateaus, focus spikes, and domain mastery over time.
-                                </p>
-                                <div className="font-code text-[10px] tracking-widest opacity-50 uppercase">
-                                    Status: Researching Vector Algorithms // SM-ALPHA-ANALYTICS
-                                </div>
+                            ))}
+                        </div>
+                    </motion.section>
+
+                    <motion.section variants={fadeIn} className="mb-12">
+                        <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">4. Roadmap</h2>
+                        <div className="border-2 border-black overflow-hidden font-code text-xs">
+                            <div className="grid grid-cols-4 bg-black text-white p-2 font-bold uppercase tracking-widest">
+                                <div className="col-span-1">Version</div>
+                                <div className="col-span-3">Features</div>
+                            </div>
+                            <div className="grid grid-cols-4 border-b border-black p-3">
+                                <div className="col-span-1 font-bold">v0.1.0-alpha</div>
+                                <div className="col-span-3 opacity-80">Tasks, Projects, Neuro-Logging (INITIALIZED)</div>
+                            </div>
+                            <div className="grid grid-cols-4 border-b border-black p-3">
+                                <div className="col-span-1 font-bold">v0.2.0-beta</div>
+                                <div className="col-span-3 opacity-80">Flow Tracker, Temporal Vector, Analytics</div>
+                            </div>
+                            <div className="grid grid-cols-4 p-3 bg-secondary/10">
+                                <div className="col-span-1 font-bold">v1.0</div>
+                                <div className="col-span-3 opacity-80 font-bold italic">Full Stereo Mind Cognitive OS</div>
                             </div>
                         </div>
                     </motion.section>
 
                     <motion.section variants={fadeIn} className="mb-12 text-center py-12 border-t-2 border-black">
-                        <h2 className="text-2xl font-bold uppercase mb-8">Ready to engineer your cognition?</h2>
+                        <h2 className="text-2xl font-bold uppercase mb-8">Ready to join the Protocol?</h2>
                         <Link href="/signup">
                             <Button size="lg" className="bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] px-12 h-16 font-code font-bold text-lg transition-all">
-                                BOOT_SYSTEM_ALPHA
+                                JOIN THE WAITLIST
                             </Button>
                         </Link>
                     </motion.section>

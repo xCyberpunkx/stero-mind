@@ -4,13 +4,20 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { 
   Radio, 
+  Layout, 
+  Layers, 
+  LineChart, 
+  Brain, 
+  Settings, 
   LogOut, 
   BookOpen, 
   Map, 
-  Settings
+  Plus, 
+  ChevronRight,
+  Clock,
+  Briefcase
 } from 'lucide-react'
 import { signOut } from '@/app/auth/actions'
-import { DashboardClient } from './DashboardClient'
 
 export default async function DashboardPage() {
     const supabase = await createClient()
@@ -29,25 +36,17 @@ export default async function DashboardPage() {
         .eq('id', user.id)
         .single()
 
+    // If profile doesn't exist or doesn't have a goal, redirect to onboarding
     if (!profile || !profile.goal) {
         redirect('/onboarding')
     }
 
-    // Fetch real data
-    const { data: projects } = await supabase
-        .from('projects')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-    const { data: tasks } = await supabase
-        .from('tasks')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-    const { data: neuroLogs } = await supabase
-        .from('neuro_logs')
-        .select('*')
-        .order('created_at', { ascending: false })
+    const widgets = [
+      { title: "Projects", icon: Briefcase, count: "0", status: "READY" },
+      { title: "Sessions", icon: Clock, count: "0", status: "READY" },
+      { title: "Learning", icon: Brain, count: "0", status: "READY" },
+      { title: "Stats", icon: LineChart, count: "ALPHA", status: "LOCK" },
+    ]
 
     return (
         <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
@@ -114,16 +113,32 @@ export default async function DashboardPage() {
               </div>
             </header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Main Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+              {widgets.map((widget, i) => (
+                <div key={i} className="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="w-10 h-10 border-2 border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+                      <widget.icon className="w-5 h-5" />
+                    </div>
+                    <span className="font-code text-[10px] font-bold opacity-30 tracking-widest">{widget.status}</span>
+                  </div>
+                  <h3 className="font-code font-bold text-xs uppercase mb-1">{widget.title}</h3>
+                  <div className="text-3xl font-bold tracking-tighter uppercase">{widget.count}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Profile Card */}
-              <div className="lg:col-span-1 border-2 border-black bg-secondary/30 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-fit">
+              <div className="md:col-span-1 border-2 border-black bg-secondary/30 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                     <Settings className="w-8 h-8" />
                   </div>
                   <div>
                     <h3 className="font-bold text-xl uppercase tracking-tighter">Core Profile</h3>
-                    <p className="font-code text-[10px] font-bold opacity-50 uppercase">Access Level: {profile.role || 'GUEST'}</p>
+                    <p className="font-code text-[10px] font-bold opacity-50 uppercase">Access Level: {profile.role}</p>
                   </div>
                 </div>
                 
@@ -142,25 +157,53 @@ export default async function DashboardPage() {
                         <span key={interest} className="border border-black px-2 py-1 text-[9px] font-bold uppercase bg-white">
                           {interest}
                         </span>
-                      )) || <span className="text-[10px] opacity-50 uppercase">No vectors initialized</span>}
+                      )) || <span className="text-[10px] opacity-50">No vectors initialized</span>}
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="font-code text-[10px] font-bold uppercase block mb-2 opacity-50">Active Stack</span>
+                    <div className="flex flex-wrap gap-2">
+                      {profile.tools?.map((tool: string) => (
+                        <span key={tool} className="border border-black px-2 py-1 text-[9px] font-bold uppercase bg-white">
+                          {tool}
+                        </span>
+                      )) || <span className="text-[10px] opacity-50">No tools linked</span>}
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-black/10">
-                  <Button variant="ghost" className="w-full border-2 border-black bg-white rounded-none h-12 font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all">
+                  <Button className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none h-12 font-code font-bold text-xs">
                     EDIT CORE_SYSTEM
                   </Button>
                 </div>
               </div>
 
-              {/* Functional Tabs */}
-              <div className="lg:col-span-3">
-                <DashboardClient 
-                  projects={projects || []} 
-                  tasks={tasks || []} 
-                  neuroLogs={neuroLogs || []} 
-                />
+              {/* Data Coming Soon Card */}
+              <div className="md:col-span-2 border-2 border-black bg-white p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="w-20 h-20 border-2 border-black bg-secondary flex items-center justify-center mb-8 mx-auto shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                    <Layers className="w-10 h-10" />
+                  </div>
+                  <h2 className="text-4xl font-bold uppercase tracking-tighter mb-4" style={{ fontFamily: "var(--font-serif)" }}>
+                    Your data is <br />coming soon.
+                  </h2>
+                  <p className="text-muted-foreground font-medium max-w-sm mx-auto mb-8">
+                    We are currently initializing the module container system. 
+                    Soon you'll be able to link your neural logs, session tracking, and knowledge clusters here.
+                  </p>
+                  <Button className="bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] px-8 h-14 font-code font-bold group">
+                    CONFIGURE MODULES
+                    <Plus className="w-4 h-4 ml-2 group-hover:rotate-90 transition-transform" />
+                  </Button>
+                </div>
+                
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-[10px] font-bold font-code opacity-30 uppercase tracking-[0.2em]">
+                  <span>REF: SM-DATA-001</span>
+                  <span>STATUS: INITIALIZING</span>
+                </div>
               </div>
             </div>
           </main>
