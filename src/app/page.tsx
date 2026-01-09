@@ -22,6 +22,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/UserNav";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { BugReport } from "@/components/BugReport";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -83,17 +84,16 @@ export default function Home() {
                 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
-                Build your mind<br />
-                <span className="italic decoration-foreground underline underline-offset-8">like a system.</span>
+                Track Your Progress.<br />
+                <span className="italic decoration-foreground underline underline-offset-8">Build Better Habits.</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeIn}
                 className="text-xl md:text-2xl text-foreground font-medium max-w-2xl mb-12 leading-tight"
               >
-                Stereo Mind is an ambitious, open-source knowledge architecture.
-                It's not an app; it's a personal infrastructure for tracking learning,
-                visualizing cognition, and engineering a systematic life.
+                A simple, free tool to help you track your learning, manage your tasks,
+                and reach your goals. No complicated setup. Just start tracking what matters.
               </motion.p>
 
               <motion.div variants={fadeIn} className="flex flex-col gap-6">
@@ -103,7 +103,7 @@ export default function Home() {
                       size="lg"
                       className="w-full bg-foreground text-background hover:bg-background hover:text-foreground border-2 border-border rounded-none shadow-[6px_6px_0px_0px_var(--border)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
                     >
-                      JOIN THE WAITLIST.OS
+                      Get Started Free
                       <ChevronRight className="w-5 h-5" />
                     </Button>
                   </Link>
@@ -130,21 +130,19 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl md:text-6xl font-bold uppercase mb-8 leading-none" style={{ fontFamily: "var(--font-serif)" }}>
-                  The Philosophy of <br />Stereo Cognition
+                  Why We Built<br />Stereo Mind
                 </h2>
                 <div className="space-y-6 text-lg md:text-xl font-light opacity-80">
                   <p>
-                    Most tools treat your brain like a garbage bin for tasks.
-                    We treat it like a high-fidelity processor.
+                    Most productivity tools just give you more to-do lists.
+                    We help you understand how you actually learn and grow.
                   </p>
                   <p>
-                    Stereo Mind is built on the principle of "Intentional Feedback Loops."
-                    By measuring the learning process—not just the result—you create
-                    a compounding asset: your own mind.
+                    Track your progress over time. See patterns in your work.
+                    Build habits that stick. It's that simple.
                   </p>
                   <p className="font-code text-sm border-l-4 border-background pl-6 py-2">
-                    // MISSION: To provide the world with a transparent,
-                  // sovereign, and extensible system for human growth.
+                    // Free and open source. Your data stays yours.
                   </p>
                 </div>
               </div>
@@ -168,12 +166,12 @@ export default function Home() {
               <div>
                 <span className="font-code text-sm font-bold uppercase tracking-[0.2em] mb-4 block">Core Systems</span>
                 <h2 className="text-4xl md:text-6xl font-bold uppercase leading-none" style={{ fontFamily: "var(--font-serif)" }}>
-                  Built for the <br />Hyper-Learner
+                  What You Can<br />Do With It
                 </h2>
               </div>
               <div className="max-w-md text-muted-foreground font-medium">
-                A massive undertaking involving integrated data structures,
-                real-time visualization, and local-first architecture.
+                Everything you need to track your learning journey,
+                manage your time, and reach your goals.
               </div>
             </div>
 
@@ -181,57 +179,57 @@ export default function Home() {
               {[
                 {
                   icon: Terminal,
-                  title: "Neuro-Logging",
-                  desc: "High-granularity session tracking with markdown support and technical metadata.",
-                  tags: ["LOCAL-FIRST", "JSON-EXPORT"],
+                  title: "Track Your Learning",
+                  desc: "Write notes about what you're learning. Track your study sessions and see your progress over time.",
+                  tags: ["SIMPLE", "EFFECTIVE"],
                 },
                 {
                   icon: Network,
-                  title: "Knowledge Graphs",
-                  desc: "Visual links between disparate topics. See how your philosophy affects your code.",
-                  tags: ["3D-RENDER", "WEBGL"],
+                  title: "Connect Ideas",
+                  desc: "See how different topics relate to each other. Discover patterns in what you're learning.",
+                  tags: ["VISUAL", "INSIGHTFUL"],
                 },
                 {
                   icon: LineChart,
-                  title: "Analytic Engine",
-                  desc: "Dozens of chart types to analyze your cognitive peaks and learning plateaus.",
-                  tags: ["D3.JS", "PRECISE"],
+                  title: "View Your Progress",
+                  desc: "Charts and graphs show you how much you've learned and when you're most productive.",
+                  tags: ["CHARTS", "ANALYTICS"],
                 },
                 {
                   icon: Cpu,
-                  title: "Skill Engineering",
-                  desc: "Treat skills like software dependencies. Track versions, depth, and mastery.",
-                  tags: ["SYSTEMS", "ALGORITHMIC"],
+                  title: "Manage Your Skills",
+                  desc: "Keep track of what you know and what you're learning. See yourself improve over time.",
+                  tags: ["ORGANIZED", "CLEAR"],
                 },
                 {
                   icon: Layers,
-                  title: "Project Clusters",
-                  desc: "Group deep work into logical clusters. Track complex, multi-year endeavors.",
-                  tags: ["HIERARCHICAL"],
+                  title: "Organize Projects",
+                  desc: "Group related work together. Perfect for long-term goals and big projects.",
+                  tags: ["STRUCTURED"],
                 },
                 {
                   icon: Code,
-                  title: "Open API",
-                  desc: "Everything is extensible. Hook into your health data, bank, or IDE.",
-                  tags: ["REST", "GRAPHQL"],
+                  title: "Your Data, Your Way",
+                  desc: "Export your data anytime. Connect it to other tools you use.",
+                  tags: ["FLEXIBLE", "OPEN"],
                 },
                 {
                   icon: Database,
-                  title: "Data Sovereignty",
-                  desc: "Your data belongs to you. Export to any format or host it yourself.",
-                  tags: ["ENCRYPTED"],
+                  title: "Privacy First",
+                  desc: "Your information belongs to you. We don't sell your data or track you.",
+                  tags: ["SECURE"],
                 },
                 {
                   icon: Share2,
-                  title: "Collaborative XP",
-                  desc: "Join learning squads. Compare systems without the toxic competition.",
-                  tags: ["SOCIAL", "GAMIFIED"],
+                  title: "Learn Together",
+                  desc: "Optional: Share progress with friends or study groups. Learn from each other.",
+                  tags: ["SOCIAL", "OPTIONAL"],
                 },
                 {
                   icon: Layout,
-                  title: "Custom Dashboards",
-                  desc: "Drag-and-drop your own cognitive command center. Modular by design.",
-                  tags: ["FLEXIBLE"],
+                  title: "Customize Everything",
+                  desc: "Make your dashboard look and work exactly how you want it to.",
+                  tags: ["PERSONAL"],
                 },
               ].map((feature, i) => (
                 <div
@@ -265,7 +263,7 @@ export default function Home() {
               <div className="border-2 border-border bg-background p-8 shadow-[12px_12px_0px_0px_var(--border)]">
                 <Github className="w-12 h-12 mb-6" />
                 <h2 className="text-4xl font-bold uppercase mb-6 font-code">Fully Open Source</h2>
-                  <p className="text-lg mb-8 text-foreground/80">
+                <p className="text-lg mb-8 text-foreground/80">
                   Stereo Mind is a public utility for human development.
                   The entire stack is open. We believe a system this important
                   cannot be owned by a single corporation.
@@ -384,8 +382,12 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
             <div className="mt-16 pt-8 border-t border-border/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold font-code opacity-50">
-              <span>© 2026 STEREO MIND PROTOCOL // ALL RIGHTS RESERVED.</span>
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <span>© 2026 STEREO MIND PROTOCOL // ALL RIGHTS RESERVED.</span>
+                <BugReport />
+              </div>
               <span>VERSION 0.1.0-ALPHA // STABLE BRANCH: MAIN</span>
             </div>
           </div>
