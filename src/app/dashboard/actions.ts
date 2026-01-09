@@ -3,11 +3,10 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-<<<<<<< HEAD
+// PROJECTS
 export async function createProject(formData: FormData) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-
   if (!user) throw new Error('Unauthorized')
 
   const name = formData.get('name') as string
@@ -45,18 +44,14 @@ export async function deleteProject(id: string) {
   revalidatePath('/dashboard')
 }
 
+// NEURO LOGS
 export async function createNeuroLog(formData: FormData) {
-=======
-export async function addNeuroLog(formData: FormData) {
->>>>>>> 7be335b2ebc93f9f8b6b871066062e262f13e7c5
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-
   if (!user) throw new Error('Unauthorized')
 
   const title = formData.get('title') as string
   const content = formData.get('content') as string
-<<<<<<< HEAD
   const duration_minutes = parseInt(formData.get('duration_minutes') as string) || 0
   const mood = formData.get('mood') as string
 
@@ -80,6 +75,7 @@ export async function deleteNeuroLog(id: string) {
   revalidatePath('/dashboard')
 }
 
+// SESSIONS
 export async function startSession(projectId: string) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -98,7 +94,6 @@ export async function startSession(projectId: string) {
 
 export async function stopSession(sessionId: string) {
   const supabase = await createClient()
-
   const { data: session } = await supabase.from('sessions').select('start_time').eq('id', sessionId).single()
   if (!session) return
 
@@ -113,60 +108,41 @@ export async function stopSession(sessionId: string) {
   }).eq('id', sessionId)
 
   if (error) throw error
-=======
-  const mood = formData.get('mood') as string
-
-  const { error } = await supabase
-    .from('neuro_logs')
-    .insert({
-      user_id: user.id,
-      title,
-      content,
-      mood,
-      tags: [],
-    })
-
-  if (error) throw error
-
   revalidatePath('/dashboard')
 }
 
+// TASKS
 export async function addTask(formData: FormData) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-
   if (!user) throw new Error('Unauthorized')
 
   const title = formData.get('title') as string
 
-  const { error } = await supabase
-    .from('tasks')
-    .insert({
-      user_id: user.id,
-      title,
-      status: 'pending',
-      priority: 'medium',
-      is_completed: false,
-    })
+  const { error } = await supabase.from('tasks').insert({
+    user_id: user.id,
+    title,
+    completed: false
+  })
 
   if (error) throw error
-
   revalidatePath('/dashboard')
 }
 
-export async function toggleTask(taskId: string, isCompleted: boolean) {
+export async function toggleTask(id: string, completed: boolean) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) throw new Error('Unauthorized')
-
-  const { error } = await supabase
-    .from('tasks')
-    .update({ is_completed: !isCompleted })
-    .eq('id', taskId)
+  const { error } = await supabase.from('tasks').update({
+    completed
+  }).eq('id', id)
 
   if (error) throw error
+  revalidatePath('/dashboard')
+}
 
->>>>>>> 7be335b2ebc93f9f8b6b871066062e262f13e7c5
+export async function deleteTask(id: string) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('tasks').delete().eq('id', id)
+
+  if (error) throw error
   revalidatePath('/dashboard')
 }

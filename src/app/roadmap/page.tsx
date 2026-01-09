@@ -77,9 +77,9 @@ export default function RoadmapPage() {
                             </div>
                             <div className="mt-4 border-t border-white/20 pt-4">
                                 <div className="w-32 h-1 bg-white/20">
-                                    <div className="w-1/4 h-full bg-white" />
+                                    <div className="w-1/2 h-full bg-white transition-all duration-1000" />
                                 </div>
-                                <div className="mt-2 opacity-50">INITIALIZING MVP...</div>
+                                <div className="mt-2 opacity-50 uppercase tracking-widest font-bold">CORE_SYSTEM ESTABLISHED // STABILIZING...</div>
                             </div>
                         </div>
                     </motion.div>
@@ -101,7 +101,7 @@ export default function RoadmapPage() {
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-8">
                                         <div className="space-y-4">
-                                            <p className="text-sm font-medium opacity-70">Focus: Core authentication, user profiles, and basic session logging.</p>
+                                            <p className="text-sm font-medium opacity-70">Focus: Core authentication, Neuro-Logging architecture, and Task Engineering.</p>
                                             <ul className="space-y-2">
                                                 <li className="flex items-center gap-3 text-sm font-bold">
                                                     <CheckCircle2 className="w-4 h-4 text-green-600" />
@@ -112,12 +112,16 @@ export default function RoadmapPage() {
                                                     Secure Protocol Access (Waitlist)
                                                 </li>
                                                 <li className="flex items-center gap-3 text-sm font-bold">
-                                                    <Circle className="w-4 h-4 opacity-30" />
-                                                    Basic Study Session Tracking
+                                                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                                                    Neural Log Infrastructure (XP)
                                                 </li>
-                                                <li className="flex items-center gap-3 text-sm font-bold">
-                                                    <Circle className="w-4 h-4 opacity-30" />
-                                                    Initial Analytic Dashboards
+                                                <li className="flex items-center gap-3 text-sm font-bold text-green-600">
+                                                    <CheckCircle2 className="w-4 h-4" />
+                                                    Task Engineering Module
+                                                </li>
+                                                <li className="flex items-center gap-3 text-sm font-bold opacity-50">
+                                                    <Clock className="w-4 h-4" />
+                                                    Session Analytic Engine
                                                 </li>
                                             </ul>
                                         </div>
