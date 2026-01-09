@@ -31,7 +31,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-<<<<<<< HEAD
-// Orchids restart: 1767968305117
-=======
->>>>>>> 28ce82c20e07d59136bd6cb511c849a1e995e9b6
+// Orchids restart: 1767968678125

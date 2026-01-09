@@ -61,60 +61,79 @@ export default function Home() {
       <main className="relative pt-32">
         {/* Hero Section */}
         <section className="px-6 pb-24">
-          <div className="max-w-6xl mx-auto border-2 border-black bg-white p-8 md:p-16 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <div className="max-w-6xl mx-auto border-2 border-black bg-white p-8 md:p-16 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
             <motion.div
               initial="initial"
               animate="animate"
               variants={stagger}
-              className="max-w-4xl"
+              className="max-w-4xl relative z-10"
             >
               <motion.div variants={fadeIn} className="mb-8">
-                <span className="inline-block border-2 border-black px-4 py-1 font-code text-xs font-bold bg-secondary uppercase tracking-widest">
+                <span className="inline-block border-2 border-black px-4 py-1 font-code text-xs font-bold bg-white uppercase tracking-widest">
                   v0.1.0-alpha // Open Source Protocol
                 </span>
               </motion.div>
 
               <motion.h1
                 variants={fadeIn}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
+                className="text-6xl md:text-8xl lg:text-[120px] font-bold tracking-tighter mb-8 leading-[0.85] uppercase"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
-                Build your mind<br />
-                <span className="italic decoration-black underline underline-offset-8">like a system.</span>
+                Build your<br />
+                <span className="underline decoration-black underline-offset-[12px]">mind</span>{" "}
+                <span className="text-black/30 italic font-light">like a system.</span>
               </motion.h1>
 
-              <motion.p
+              <motion.div
                 variants={fadeIn}
-                className="text-xl md:text-2xl text-black font-medium max-w-2xl mb-12 leading-tight"
+                className="text-xl md:text-2xl text-black font-medium max-w-3xl mb-12 leading-tight"
               >
-                Stereo Mind is an ambitious, open-source knowledge architecture.
-                It's not an app; it's a personal infrastructure for tracking learning,
-                visualizing cognition, and engineering a systematic life.
-              </motion.p>
+                Stereo Mind is an ambitious personal infrastructure for high-fidelity cognitive engineering.{" "}
+                <span className="bg-black text-white px-2 py-0.5">Integrated.</span>{" "}
+                <span className="bg-black text-white px-2 py-0.5">Open-Source.</span>{" "}
+                <span className="bg-black text-white px-2 py-0.5">Systematic.</span>
+              </motion.div>
 
-              <motion.div variants={fadeIn} className="flex flex-col gap-6">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/signup" className="w-full sm:w-auto">
-                    <Button
-                      size="lg"
-                      className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
-                    >
-                      JOIN THE WAITLIST.OS
-                      <ChevronRight className="w-5 h-5" />
-                    </Button>
-                  </Link>
-                </div>
-                <Link href="/roadmap">
+              <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-6 mb-16">
+                <Link href="/signup">
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3 group"
+                  >
+                    BOOT_PROTOCOL
+                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link href="/whitepaper">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-black hover:text-white transition-all w-fit group"
+                    className="w-full sm:w-auto border-2 border-black bg-white rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-black hover:text-white transition-all flex items-center justify-center gap-3"
                   >
-                    Learn more
-                    <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    READ_WHITEPAPER
+                    <BookOpen className="w-5 h-5" />
                   </Button>
                 </Link>
               </motion.div>
+
+              <div className="pt-8 border-t border-black/10 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                  <div className="text-[10px] font-bold font-code opacity-40 uppercase mb-1">Neuro_Logs</div>
+                  <div className="font-code font-bold text-sm uppercase">Persistent</div>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold font-code opacity-40 uppercase mb-1">Task_Queue</div>
+                  <div className="font-code font-bold text-sm uppercase">Priority_Sort</div>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold font-code opacity-40 uppercase mb-1">Projects</div>
+                  <div className="font-code font-bold text-sm uppercase">Clustered</div>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold font-code opacity-40 uppercase mb-1">Analytics</div>
+                  <div className="font-code font-bold text-sm uppercase">Real_Time</div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
