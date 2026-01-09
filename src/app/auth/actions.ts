@@ -8,12 +8,12 @@ export async function signInWithGoogle() {
   const supabase = await createClient()
   const origin = (await headers()).get('origin')
 
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${origin}/auth/callback?next=/dashboard`,
-      },
-    })
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${origin}/auth/callback?next=/dashboard`,
+    },
+  })
 
   if (error) {
     console.error('Google auth error:', error.message)
@@ -29,12 +29,12 @@ export async function signInWithGithub() {
   const supabase = await createClient()
   const origin = (await headers()).get('origin')
 
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: `${origin}/auth/callback?next=/dashboard`,
-      },
-    })
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+    options: {
+      redirectTo: `${origin}/auth/callback?next=/dashboard`,
+    },
+  })
 
   if (error) {
     console.error('GitHub auth error:', error.message)
@@ -63,17 +63,17 @@ export async function signUpWithEmail(formData: FormData) {
     return { error: 'Password must be at least 6 characters' }
   }
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback?next=/dashboard`,
-        data: {
-          first_name: firstName,
-          last_name: lastName,
-        },
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${origin}/auth/callback?next=/dashboard`,
+      data: {
+        first_name: firstName,
+        last_name: lastName,
       },
-    })
+    },
+  })
 
   if (error) {
     console.error('Sign up error:', error.message)
@@ -158,4 +158,24 @@ export async function signOut() {
   const supabase = await createClient()
   await supabase.auth.signOut()
   redirect('/login')
+}
+
+export async function resendVerificationEmail(email: string) {
+  const supabase = await createClient()
+  const origin = (await headers()).get('origin')
+
+  const { error } = await supabase.auth.resend({
+    type: 'signup',
+    email: email,
+    options: {
+      emailRedirectTo: `${origin}/auth/callback?next=/dashboard`,
+    },
+  })
+
+  if (error) {
+    console.error('Resend error:', error.message)
+    return { error: error.message }
+  }
+
+  return { success: true, message: 'Verification email resent successfully.' }
 }
