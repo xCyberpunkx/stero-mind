@@ -18,6 +18,9 @@ import {
   Briefcase
 } from 'lucide-react'
 import { signOut } from '@/app/auth/actions'
+import { ProjectManager } from '@/components/ProjectManager'
+import { NeuroLogManager } from '@/components/NeuroLogManager'
+import { SessionTracker } from '@/components/SessionTracker'
 
 export default async function DashboardPage() {
     const supabase = await createClient()
@@ -41,10 +44,23 @@ export default async function DashboardPage() {
         redirect('/onboarding')
     }
 
+    // Fetch dashboard data
+    const [projectsRes, logsRes, sessionsRes, activeSessionRes] = await Promise.all([
+      supabase.from('projects').select('*').order('created_at', { ascending: false }),
+      supabase.from('neuro_logs').select('*').order('created_at', { ascending: false }),
+      supabase.from('sessions').select('*', { count: 'exact' }),
+      supabase.from('sessions').select('*').eq('is_active', true).eq('user_id', user.id).maybeSingle()
+    ])
+
+    const projects = projectsRes.data || []
+    const logs = logsRes.data || []
+    const sessionsCount = sessionsRes.count || 0
+    const activeSession = activeSessionRes.data
+
     const widgets = [
-      { title: "Projects", icon: Briefcase, count: "0", status: "READY" },
-      { title: "Sessions", icon: Clock, count: "0", status: "READY" },
-      { title: "Learning", icon: Brain, count: "0", status: "READY" },
+      { title: "Projects", icon: Briefcase, count: projects.length.toString(), status: "ACTIVE" },
+      { title: "Sessions", icon: Clock, count: sessionsCount.toString(), status: "READY" },
+      { title: "Neuro Logs", icon: Brain, count: logs.length.toString(), status: "LOGGING" },
       { title: "Stats", icon: LineChart, count: "ALPHA", status: "LOCK" },
     ]
 
@@ -129,6 +145,10 @@ export default async function DashboardPage() {
               ))}
             </div>
 
+            <div className="mb-12">
+              <SessionTracker projects={projects} activeSession={activeSession} />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Profile Card */}
               <div className="md:col-span-1 border-2 border-black bg-secondary/30 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
@@ -180,29 +200,13 @@ export default async function DashboardPage() {
                 </div>
               </div>
 
-              {/* Data Coming Soon Card */}
-              <div className="md:col-span-2 border-2 border-black bg-white p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-                <div className="relative z-10">
-                  <div className="w-20 h-20 border-2 border-black bg-secondary flex items-center justify-center mb-8 mx-auto shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-                    <Layers className="w-10 h-10" />
-                  </div>
-                  <h2 className="text-4xl font-bold uppercase tracking-tighter mb-4" style={{ fontFamily: "var(--font-serif)" }}>
-                    Your data is <br />coming soon.
-                  </h2>
-                  <p className="text-muted-foreground font-medium max-w-sm mx-auto mb-8">
-                    We are currently initializing the module container system. 
-                    Soon you'll be able to link your neural logs, session tracking, and knowledge clusters here.
-                  </p>
-                  <Button className="bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] px-8 h-14 font-code font-bold group">
-                    CONFIGURE MODULES
-                    <Plus className="w-4 h-4 ml-2 group-hover:rotate-90 transition-transform" />
-                  </Button>
+              {/* CRUD Managers */}
+              <div className="md:col-span-2 space-y-8">
+                <div className="border-2 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+                  <ProjectManager initialProjects={projects} />
                 </div>
-                
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-[10px] font-bold font-code opacity-30 uppercase tracking-[0.2em]">
-                  <span>REF: SM-DATA-001</span>
-                  <span>STATUS: INITIALIZING</span>
+                <div className="border-2 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+                  <NeuroLogManager initialLogs={logs} />
                 </div>
               </div>
             </div>

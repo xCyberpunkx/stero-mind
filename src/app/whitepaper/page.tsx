@@ -100,32 +100,32 @@ export default function WhitepaperPage() {
                         <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">2. System Overview</h2>
                         <div className="grid md:grid-cols-2 gap-8 mb-8">
                             <div className="border-2 border-black p-6">
-                                <h3 className="font-bold uppercase mb-4 font-code text-sm underline">2.1 Core Modules (Live)</h3>
+                                <h3 className="font-bold uppercase mb-4 font-code text-sm underline">2.1 Core Modules (MVP)</h3>
                                 <ul className="space-y-4 text-sm">
-                                    <li><strong>Neuro-Logging:</strong> Capture high-granularity session reflections with cognitive state metadata.</li>
-                                    <li><strong>Task Queue:</strong> Priority-based execution engine linked directly to project clusters.</li>
-                                    <li><strong>Project Clusters:</strong> Hierarchical organization for multi-year deep work and skill engineering.</li>
-                                    <li><strong>Flow Tracker:</strong> Real-time monitoring of session duration and cognitive output.</li>
+                                    <li><strong>Knowledge / Study:</strong> High-granularity tracking with metadata and notes.</li>
+                                    <li><strong>Projects / Goals:</strong> Organize learning into logical clusters.</li>
+                                    <li><strong>Charts & Dashboards:</strong> Visualize hours, streaks, trends, and patterns.</li>
+                                    <li><strong>Gamification:</strong> XP, levels, and streaks for consistent engagement.</li>
                                 </ul>
                             </div>
                             <div className="border-2 border-black p-6 bg-secondary/10">
-                                <h3 className="font-bold uppercase mb-4 font-code text-sm underline">Coming Soon</h3>
+                                <h3 className="font-bold uppercase mb-4 font-code text-sm underline">Future Modules</h3>
                                 <ul className="space-y-4 text-sm italic opacity-80">
-                                    <li><strong>Temporal Vector:</strong> Visual cognitive timeline for long-term correlation.</li>
-                                    <li><strong>Analytic Engine:</strong> D3-powered visualization of learning plateaus.</li>
-                                    <li>Social Synchronization (Peer-to-peer growth)</li>
-                                    <li>Neural API (Third-party data ingestion)</li>
+                                    <li>Habits & Health (Sleep, exercise, fasting)</li>
+                                    <li>Mood & Energy tracking</li>
+                                    <li>Finance & Project ROI</li>
+                                    <li>Spiritual / Reflection integration</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <h3 className="font-bold uppercase mb-4 font-code text-sm underline">2.2 Technical Stack</h3>
+                        <h3 className="font-bold uppercase mb-4 font-code text-sm underline">2.2 Technical Architecture</h3>
                         <div className="font-code text-xs bg-black text-white p-8 overflow-x-auto whitespace-pre rounded-sm">
-                            {`[FRONTEND] : Next.js 15 (App Router, Turbopack)
-[BACKEND]  : Supabase (Auth, PostgreSQL, Realtime)
-[STYLE]    : Tailwind CSS + Lucide Icons
-[MOTION]   : Framer Motion
-[DATA]     : Server Actions + Persistence Layer`}
+                            {`[FRONTEND] : Next.js - Modular & Responsive
+[BACKEND]  : Supabase - Auth, DB, RLS
+[DATA]     : Exportable, Local-first
+[VISUAL]   : Recharts, D3.js, WebGL
+[API]      : Open & Extensible`}
                         </div>
                     </motion.section>
 
@@ -133,10 +133,10 @@ export default function WhitepaperPage() {
                         <h2 className="text-2xl font-bold uppercase font-code border-l-4 border-black pl-4 mb-6">3. Principles & Design Philosophy</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-code text-xs uppercase font-bold">
                             {[
-                                "Tight Feedback Loops",
+                                "Intentional Feedback Loops",
                                 "Extensible Architecture",
                                 "Data Sovereignty",
-                                "Intentional Input",
+                                "Gamified Engagement",
                                 "Visual Clarity",
                                 "Open Source Ethos"
                             ].map((p, i) => (
@@ -157,15 +157,15 @@ export default function WhitepaperPage() {
                             </div>
                             <div className="grid grid-cols-4 border-b border-black p-3">
                                 <div className="col-span-1 font-bold">v0.1.0-alpha</div>
-                                <div className="col-span-3 opacity-80">Tasks, Projects, Neuro-Logging (INITIALIZED)</div>
+                                <div className="col-span-3 opacity-80">Knowledge module, Dashboards, Waitlist</div>
                             </div>
                             <div className="grid grid-cols-4 border-b border-black p-3">
                                 <div className="col-span-1 font-bold">v0.2.0-beta</div>
-                                <div className="col-span-3 opacity-80">Flow Tracker, Temporal Vector, Analytics</div>
+                                <div className="col-span-3 opacity-80">Gamification, Streaks, Project clusters</div>
                             </div>
                             <div className="grid grid-cols-4 p-3 bg-secondary/10">
                                 <div className="col-span-1 font-bold">v1.0</div>
-                                <div className="col-span-3 opacity-80 font-bold italic">Full Stereo Mind Cognitive OS</div>
+                                <div className="col-span-3 opacity-80 font-bold italic">Full Stereo Mind OS</div>
                             </div>
                         </div>
                     </motion.section>
