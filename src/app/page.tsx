@@ -21,6 +21,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/UserNav";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -50,11 +51,14 @@ export default function Home() {
             <span className="font-bold text-xl tracking-tighter uppercase font-code group-hover:tracking-normal transition-all">Stereo Mind</span>
           </Link>
           <div className="hidden md:flex items-center gap-8 font-code text-sm font-medium">
-            <a href="#philosophy" className="hover:underline underline-offset-4 decoration-2 decoration-black">PHILOSOPHY</a>
-            <Link href="/whitepaper" className="hover:underline underline-offset-4 decoration-2 decoration-black">WHITEPAPER</Link>
-            <Link href="/roadmap" className="hover:underline underline-offset-4 decoration-2 decoration-black">ROADMAP</Link>
+            <a href="#philosophy" className="hover:underline underline-offset-4 decoration-2 decoration-black dark:decoration-white">PHILOSOPHY</a>
+            <Link href="/whitepaper" className="hover:underline underline-offset-4 decoration-2 decoration-black dark:decoration-white">WHITEPAPER</Link>
+            <Link href="/roadmap" className="hover:underline underline-offset-4 decoration-2 decoration-black dark:decoration-white">ROADMAP</Link>
           </div>
-          <UserNav />
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <UserNav />
+          </div>
         </div>
       </nav>
 

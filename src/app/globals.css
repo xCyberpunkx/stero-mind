@@ -88,6 +88,42 @@
   --emerald-muted: #f3f3f3;
 }
 
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0a;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #a1a1a1;
+  --accent: #1a1a1a;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4d4d;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #ffffff;
+  --chart-1: #ffffff;
+  --chart-2: #cccccc;
+  --chart-3: #999999;
+  --chart-4: #666666;
+  --chart-5: #333333;
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #ffffff;
+  --sidebar-ring: #ffffff;
+  --emerald: #ffffff;
+  --emerald-muted: #1a1a1a;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -111,11 +147,22 @@
       linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
     background-size: 32px 32px;
   }
+  .dark .bg-grid {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
   .bg-radial-fade {
     background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 0, 0, 0.05), transparent);
   }
+  .dark .bg-radial-fade {
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 255, 255, 0.05), transparent);
+  }
   .retro-shadow {
-    shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+  }
+  .dark .retro-shadow {
+    box-shadow: 4px 4px 0px 0px rgba(255,255,255,1);
   }
   .retro-shadow-hover {
     transition: all 0.2s;
@@ -124,8 +171,14 @@
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
   }
+  .dark .retro-shadow-hover:hover {
+    box-shadow: 6px 6px 0px 0px rgba(255,255,255,1);
+  }
   .retro-shadow-active:active {
     transform: translate(2px, 2px);
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+  }
+  .dark .retro-shadow-active:active {
+    box-shadow: 0px 0px 0px 0px rgba(255,255,255,1);
   }
 }
