@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Radio, Github, Globe, Share2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Footer } from "@/components/Footer";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -179,10 +178,15 @@ export default function WhitepaperPage() {
                             </Button>
                         </Link>
                     </motion.section>
+
+                    <footer className="pt-8 border-t-2 border-black flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold font-code opacity-50 uppercase tracking-widest">
+                        <div>STEREO MIND PROTOCOL // SM-001-ALPHA</div>
+                        <div className="flex gap-6">
+                            <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="hover:underline">Github</a>
+                            <Share2 className="w-3 h-3" />
+                        </div>
+                    </footer>
                 </motion.div>
-                <div className="mt-24">
-                  <Footer />
-                </div>
             </main>
         </div>
     );

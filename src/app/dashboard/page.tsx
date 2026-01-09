@@ -18,7 +18,6 @@ import {
   Briefcase
 } from 'lucide-react'
 import { signOut } from '@/app/auth/actions'
-import { BugReport } from '@/components/BugReport'
 
 export default async function DashboardPage() {
     const supabase = await createClient()
@@ -205,18 +204,9 @@ export default async function DashboardPage() {
                   <span>REF: SM-DATA-001</span>
                   <span>STATUS: INITIALIZING</span>
                 </div>
-                </div>
               </div>
-
-              <footer className="mt-20 pt-8 border-t-2 border-black flex justify-between items-center text-[10px] font-bold font-code opacity-40 uppercase tracking-widest">
-                <span>System Dashboard // v0.1.0-Alpha</span>
-                <div className="flex gap-8">
-                  <Link href="/roadmap" className="hover:underline">Roadmap</Link>
-                  <BugReport />
-                </div>
-              </footer>
-            </main>
+            </div>
+          </main>
         </div>
     )
 }
-

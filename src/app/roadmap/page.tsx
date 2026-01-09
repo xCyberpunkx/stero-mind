@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Radio, Github, CheckCircle2, Circle, Clock, Terminal, Activity, Zap } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Footer } from "@/components/Footer";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -239,7 +238,13 @@ export default function RoadmapPage() {
                         </div>
                     </motion.section>
 
-                    <Footer />
+                    <footer className="pt-16 pb-8 border-t-2 border-black flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold font-code opacity-50 uppercase tracking-widest">
+                        <div>STEREO MIND PROTOCOL // SM-001-ALPHA // ROADMAP_VER: 2.1</div>
+                        <div className="flex gap-12">
+                            <Link href="/whitepaper" className="hover:underline">Read the Whitepaper</Link>
+                            <Link href="/signup" className="hover:underline">Join the Waitlist</Link>
+                        </div>
+                    </footer>
                 </motion.div>
             </main>
         </div>

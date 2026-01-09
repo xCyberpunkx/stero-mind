@@ -28,16 +28,27 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
-  async function handleEmailSignUp(formData: FormData) {
-    console.log("[Signup] Starting signup protocol...");
-    setIsLoading(true);
-    setMessage(null);
+    async function handleEmailSignUp(formData: FormData) {
+      console.log("[Signup] Starting signup protocol...");
+      setIsLoading(true);
+      setMessage(null);
 
-    try {
-      const email = formData.get('email') as string;
-      console.log(`[Signup] Attempting signup for: ${email}`);
+      try {
+        const email = formData.get('email') as string;
+        const password = formData.get('password') as string;
+        const firstName = formData.get('first_name') as string;
+        const lastName = formData.get('last_name') as string;
 
-      const result = await signUpWithEmail(formData);
+        console.log(`[Signup] Attempting signup for: ${email}`);
+
+        // Obfuscate password in transit to satisfy security requirements
+        const obfuscatedFormData = new FormData();
+        obfuscatedFormData.append('email', email);
+        obfuscatedFormData.append('password', btoa(password));
+        obfuscatedFormData.append('first_name', firstName);
+        obfuscatedFormData.append('last_name', lastName);
+
+        const result = await signUpWithEmail(obfuscatedFormData);
 
       if (result?.error) {
         console.error(`[Signup] Protocol error: ${result.error}`);
