@@ -101,23 +101,23 @@ export default function RoadmapPage() {
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-8">
                                         <div className="space-y-4">
-                                            <p className="text-sm font-medium opacity-70">Focus: Core authentication, Neuro-Logging, and Task Engineering.</p>
+                                            <p className="text-sm font-medium opacity-70">Focus: Core authentication, user profiles, and basic session logging.</p>
                                             <ul className="space-y-2">
                                                 <li className="flex items-center gap-3 text-sm font-bold">
                                                     <CheckCircle2 className="w-4 h-4 text-green-600" />
-                                                    Neural Log Infrastructure (XP)
+                                                    Supabase Integration & RLS
                                                 </li>
                                                 <li className="flex items-center gap-3 text-sm font-bold">
                                                     <CheckCircle2 className="w-4 h-4 text-green-600" />
-                                                    Task Engineering Module
+                                                    Secure Protocol Access (Waitlist)
                                                 </li>
                                                 <li className="flex items-center gap-3 text-sm font-bold">
-                                                    <CheckCircle2 className="w-4 h-4 text-green-600" />
-                                                    Goal & Milestone Tracking
+                                                    <Circle className="w-4 h-4 opacity-30" />
+                                                    Basic Study Session Tracking
                                                 </li>
-                                                <li className="flex items-center gap-3 text-sm font-bold opacity-50">
-                                                    <Clock className="w-4 h-4" />
-                                                    Visual Metrics & Temporal Map
+                                                <li className="flex items-center gap-3 text-sm font-bold">
+                                                    <Circle className="w-4 h-4 opacity-30" />
+                                                    Initial Analytic Dashboards
                                                 </li>
                                             </ul>
                                         </div>

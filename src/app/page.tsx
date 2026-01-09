@@ -21,7 +21,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/UserNav";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -40,20 +40,20 @@ const stagger = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
-      <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
+      <div className="bg-grid fixed inset-0 pointer-events-none" />
 
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-border bg-background/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 border-2 border-black bg-white flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
+            <div className="w-10 h-10 border-2 border-border bg-background flex items-center justify-center shadow-[2px_2px_0px_0px_var(--border)] group-hover:shadow-[4px_4px_0px_0px_var(--border)] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
               <Radio className="w-6 h-6" />
             </div>
             <span className="font-bold text-xl tracking-tighter uppercase font-code group-hover:tracking-normal transition-all">Stereo Mind</span>
           </Link>
           <div className="hidden md:flex items-center gap-8 font-code text-sm font-medium">
-            <a href="#philosophy" className="hover:underline underline-offset-4 decoration-2 decoration-black dark:decoration-white">PHILOSOPHY</a>
-            <Link href="/whitepaper" className="hover:underline underline-offset-4 decoration-2 decoration-black dark:decoration-white">WHITEPAPER</Link>
-            <Link href="/roadmap" className="hover:underline underline-offset-4 decoration-2 decoration-black dark:decoration-white">ROADMAP</Link>
+            <a href="#philosophy" className="hover:underline underline-offset-4 decoration-2 decoration-foreground">PHILOSOPHY</a>
+            <Link href="/whitepaper" className="hover:underline underline-offset-4 decoration-2 decoration-foreground">WHITEPAPER</Link>
+            <Link href="/roadmap" className="hover:underline underline-offset-4 decoration-2 decoration-foreground">ROADMAP</Link>
           </div>
           <div className="flex items-center gap-4">
             <ThemeToggle />
@@ -65,7 +65,7 @@ export default function Home() {
       <main className="relative pt-32">
         {/* Hero Section */}
         <section className="px-6 pb-24">
-          <div className="max-w-6xl mx-auto border-2 border-black bg-white p-8 md:p-16 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <div className="max-w-6xl mx-auto border-2 border-border bg-background p-8 md:p-16 shadow-[8px_8px_0px_0px_var(--border)] dark:shadow-[8px_8px_0px_0px_var(--border)]">
             <motion.div
               initial="initial"
               animate="animate"
@@ -73,27 +73,27 @@ export default function Home() {
               className="max-w-4xl"
             >
               <motion.div variants={fadeIn} className="mb-8">
-                <span className="inline-block border-2 border-black px-4 py-1 font-code text-xs font-bold bg-secondary uppercase tracking-widest">
+                <span className="inline-block border-2 border-border px-4 py-1 font-code text-xs font-bold bg-secondary uppercase tracking-widest">
                   v0.1.0-alpha // Open Source Protocol
                 </span>
               </motion.div>
 
               <motion.h1
                 variants={fadeIn}
-                className="text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter mb-8 leading-[0.85] uppercase"
+                className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
-                Engineer your <br />
-                <span className="italic decoration-black underline underline-offset-[12px]">Cognitive Edge.</span>
+                Build your mind<br />
+                <span className="italic decoration-foreground underline underline-offset-8">like a system.</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeIn}
-                className="text-xl md:text-3xl text-black font-medium max-w-3xl mb-12 leading-tight"
+                className="text-xl md:text-2xl text-foreground font-medium max-w-2xl mb-12 leading-tight"
               >
-                The high-performance operating system for your mind.
-                Track neural logs, engineer tasks, and visualize your progress
-                with absolute clarity.
+                Stereo Mind is an ambitious, open-source knowledge architecture.
+                It's not an app; it's a personal infrastructure for tracking learning,
+                visualizing cognition, and engineering a systematic life.
               </motion.p>
 
               <motion.div variants={fadeIn} className="flex flex-col gap-6">
@@ -101,7 +101,7 @@ export default function Home() {
                   <Link href="/signup" className="w-full sm:w-auto">
                     <Button
                       size="lg"
-                      className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
+                      className="w-full bg-foreground text-background hover:bg-background hover:text-foreground border-2 border-border rounded-none shadow-[6px_6px_0px_0px_var(--border)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
                     >
                       JOIN THE WAITLIST.OS
                       <ChevronRight className="w-5 h-5" />
@@ -112,7 +112,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-black bg-white rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-black hover:text-white transition-all w-fit group"
+                    className="border-2 border-border bg-background rounded-none shadow-[6px_6px_0px_0px_var(--border)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-8 h-16 text-lg font-code font-bold hover:bg-foreground hover:text-background transition-all w-fit group"
                   >
                     Learn more
                     <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -124,8 +124,8 @@ export default function Home() {
         </section>
 
         {/* Philosophy Section */}
-        <section id="philosophy" className="py-24 px-6 bg-black text-white overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-grid invert pointer-events-none" />
+        <section id="philosophy" className="py-24 px-6 bg-foreground text-background overflow-hidden relative transition-colors duration-300">
+          <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-grid pointer-events-none" />
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
@@ -142,15 +142,15 @@ export default function Home() {
                     By measuring the learning process—not just the result—you create
                     a compounding asset: your own mind.
                   </p>
-                  <p className="font-code text-sm border-l-4 border-white pl-6 py-2">
+                  <p className="font-code text-sm border-l-4 border-background pl-6 py-2">
                     // MISSION: To provide the world with a transparent,
                   // sovereign, and extensible system for human growth.
                   </p>
                 </div>
               </div>
-              <div className="aspect-square border-2 border-white relative flex items-center justify-center p-12">
-                <div className="w-full h-full border border-white/20 absolute inset-0 rotate-45 scale-75" />
-                <div className="w-full h-full border border-white/20 absolute inset-0 -rotate-12 scale-90" />
+              <div className="aspect-square border-2 border-background relative flex items-center justify-center p-12">
+                <div className="w-full h-full border border-background/20 absolute inset-0 rotate-45 scale-75" />
+                <div className="w-full h-full border border-background/20 absolute inset-0 -rotate-12 scale-90" />
                 <Brain className="w-32 h-32" />
                 <div className="absolute bottom-6 right-6 font-code text-[10px] opacity-50 text-right">
                   REF: SM-001-ALPHA<br />
@@ -236,9 +236,9 @@ export default function Home() {
               ].map((feature, i) => (
                 <div
                   key={i}
-                  className="group border-2 border-black p-8 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-1 hover:-translate-y-1 transition-all"
+                  className="group border-2 border-border p-8 bg-background shadow-[4px_4px_0px_0px_var(--border)] hover:shadow-[8px_8px_0px_0px_var(--border)] hover:-translate-x-1 hover:-translate-y-1 transition-all"
                 >
-                  <div className="w-12 h-12 border-2 border-black flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 border-2 border-border flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white transition-colors">
                     <feature.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-bold uppercase mb-4 font-code tracking-tighter">{feature.title}</h3>
@@ -247,7 +247,7 @@ export default function Home() {
                   </p>
                   <div className="flex flex-wrap gap-2 mt-auto">
                     {feature.tags.map((tag) => (
-                      <span key={tag} className="text-[9px] font-bold border border-black/20 px-2 py-0.5 bg-secondary uppercase">
+                      <span key={tag} className="text-[9px] font-bold border border-border/20 px-2 py-0.5 bg-secondary uppercase">
                         {tag}
                       </span>
                     ))}
@@ -259,24 +259,25 @@ export default function Home() {
         </section>
 
         {/* Open Source / Big Project Section */}
-        <section id="open-source" className="py-24 px-6 border-y-2 border-black bg-secondary/50">
+        <section id="open-source" className="py-24 px-6 border-y-2 border-border bg-secondary/50">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="border-2 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+              <div className="border-2 border-border bg-background p-8 shadow-[12px_12px_0px_0px_var(--border)]">
                 <Github className="w-12 h-12 mb-6" />
                 <h2 className="text-4xl font-bold uppercase mb-6 font-code">Fully Open Source</h2>
-                <p className="text-lg mb-8 text-black/80">
+                  <p className="text-lg mb-8 text-foreground/80">
                   Stereo Mind is a public utility for human development.
                   The entire stack is open. We believe a system this important
                   cannot be owned by a single corporation.
                 </p>
                 <div className="flex items-center gap-6">
                   <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="ml-auto">
-                    <Button className="bg-black text-white hover:bg-secondary hover:text-black border-2 border-black rounded-none px-6 h-12 font-code font-bold uppercase">
+                    <Button className="bg-foreground text-background hover:bg-secondary hover:text-foreground border-2 border-border rounded-none px-6 h-12 font-code font-bold uppercase">
                       View Repository
                     </Button>
                   </a>
                 </div>
+
               </div>
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
@@ -311,7 +312,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center border-4 border-black p-12 md:p-24 bg-white shadow-[20px_20px_0px_0px_rgba(0,0,0,1)]"
+            className="max-w-4xl mx-auto text-center border-4 border-border p-12 md:p-24 bg-background shadow-[20px_20px_0px_0px_var(--border)]"
           >
             <h2
               className="text-5xl md:text-7xl font-bold mb-8 uppercase tracking-tighter leading-none"
@@ -327,7 +328,7 @@ export default function Home() {
               <Link href="/signup" className="w-full md:w-auto">
                 <Button
                   size="lg"
-                  className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-12 h-20 text-xl font-code font-bold transition-all flex items-center justify-center gap-4"
+                  className="w-full bg-foreground text-background hover:bg-background hover:text-foreground border-2 border-border rounded-none shadow-[6px_6px_0px_0px_var(--border)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-12 h-20 text-xl font-code font-bold transition-all flex items-center justify-center gap-4"
                 >
                   INITIALIZE ACCESS
                   <ChevronRight className="w-6 h-6" />
@@ -339,7 +340,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full md:w-auto border-2 border-black bg-white rounded-none h-16 px-12 text-lg font-code font-bold hover:bg-secondary"
+                  className="w-full md:w-auto border-2 border-border bg-background rounded-none h-16 px-12 text-lg font-code font-bold hover:bg-secondary"
                 >
                   Read the Whitepaper
                 </Button>
@@ -348,7 +349,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        <footer className="py-16 px-6 border-t-2 border-black bg-white">
+        <footer className="py-16 px-6 border-t-2 border-border bg-background">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row items-start justify-between gap-12">
               <div className="max-w-xs">
@@ -383,7 +384,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="mt-16 pt-8 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold font-code opacity-50">
+            <div className="mt-16 pt-8 border-t border-border/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold font-code opacity-50">
               <span>© 2026 STEREO MIND PROTOCOL // ALL RIGHTS RESERVED.</span>
               <span>VERSION 0.1.0-ALPHA // STABLE BRANCH: MAIN</span>
             </div>

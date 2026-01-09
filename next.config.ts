@@ -31,4 +31,8 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-// Orchids restart: 1767970847847
+<<<<<<< Updated upstream
+// Orchids restart: 1767971492424
+=======
+// Orchids restart: 1767961642794
+>>>>>>> Stashed changes

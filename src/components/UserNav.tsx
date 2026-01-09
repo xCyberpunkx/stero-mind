@@ -41,32 +41,33 @@ export function UserNav() {
             Dashboard
           </Button>
         </Link>
-        <form action={signOut}>
-          <Button 
-            type="submit"
-            variant="outline" 
-            className="border-2 border-black bg-white rounded-none h-10 px-4 font-code font-bold text-xs hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            LOGOUT
+          <form action={signOut}>
+            <Button 
+              type="submit"
+              variant="outline" 
+              className="border-2 border-border bg-background rounded-none h-10 px-4 font-code font-bold text-xs hover:bg-foreground hover:text-background transition-all shadow-[2px_2px_0px_0px_var(--border)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              LOGOUT
+            </Button>
+          </form>
+        </div>
+      );
+    }
+  
+    return (
+      <div className="flex items-center gap-4">
+        <Link href="/login">
+          <Button variant="ghost" className="font-code text-xs font-bold uppercase">
+            SIGN IN
           </Button>
-        </form>
+        </Link>
+        <Link href="/signup">
+          <Button className="border-2 border-border bg-foreground text-background hover:bg-background hover:text-foreground transition-all rounded-none shadow-[4px_4px_0px_0px_var(--border)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-6 h-10 font-code font-bold text-xs">
+            WAITLIST.OS
+          </Button>
+        </Link>
       </div>
-    );
-  }
 
-  return (
-    <div className="flex items-center gap-4">
-      <Link href="/login">
-        <Button variant="ghost" className="font-code text-xs font-bold uppercase">
-          SIGN IN
-        </Button>
-      </Link>
-      <Link href="/signup">
-        <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black transition-all rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] px-6 h-10 font-code font-bold text-xs">
-          WAITLIST.OS
-        </Button>
-      </Link>
-    </div>
   );
 }
