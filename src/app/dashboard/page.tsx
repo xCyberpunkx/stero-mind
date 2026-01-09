@@ -2,205 +2,229 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import {
-  Radio,
-  Layout,
-  Layers,
-  LineChart,
-  Brain,
-  Settings,
-  LogOut,
-  BookOpen,
-  Map,
-  Plus,
-  ChevronRight,
+import { 
+  Radio, 
+  Layers, 
+  LineChart, 
+  Brain, 
+  Settings, 
+  LogOut, 
+  BookOpen, 
+  Map, 
+  Plus, 
   Clock,
   Briefcase,
-  ListTodo
+  Activity,
+  Zap,
+  Target
 } from 'lucide-react'
 import { signOut } from '@/app/auth/actions'
-import { NeuroLogManager } from '@/components/NeuroLogManager'
-import { TaskManager } from '@/components/TaskManager'
+import { TaskQueue } from '@/components/dashboard/TaskQueue'
+import { NeuroLogs } from '@/components/dashboard/NeuroLogs'
 
 export default async function DashboardPage() {
-  const supabase = await createClient()
+    const supabase = await createClient()
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    const {
+        data: { user },
+    } = await supabase.auth.getUser()
 
-  if (!user) {
-    redirect('/login')
-  }
+    if (!user) {
+        redirect('/login')
+    }
 
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', user.id)
-    .single()
+    const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single()
 
-  // If profile doesn't exist or doesn't have a goal, redirect to onboarding
-  if (!profile || !profile.goal) {
-    redirect('/onboarding')
-  }
+    if (!profile || !profile.goal) {
+        redirect('/onboarding')
+    }
 
-  // Fetch real data counts
-  const { data: projects } = await supabase.from('projects').select('id').eq('user_id', user.id)
-  const { data: sessions } = await supabase.from('sessions').select('id').eq('user_id', user.id)
-  const { data: neuroLogs } = await supabase.from('neuro_logs').select('*').eq('user_id', user.id).order('created_at', { ascending: false })
-  const { data: tasks } = await supabase.from('tasks').select('*').eq('user_id', user.id).order('created_at', { ascending: false })
+    // Fetch dynamic counts
+    const [
+      { count: projectCount },
+      { count: sessionCount },
+      { count: logCount }
+    ] = await Promise.all([
+      supabase.from('projects').select('*', { count: 'exact', head: true }).eq('user_id', user.id),
+      supabase.from('sessions').select('*', { count: 'exact', head: true }).eq('user_id', user.id),
+      supabase.from('neuro_logs').select('*', { count: 'exact', head: true }).eq('user_id', user.id)
+    ])
 
-  const widgets = [
-    { title: "Projects", icon: Briefcase, count: projects?.length || "0", status: "READY" },
-    { title: "Sessions", icon: Clock, count: sessions?.length || "0", status: "READY" },
-    { title: "Neuro Logs", icon: Brain, count: neuroLogs?.length || "0", status: "READY" },
-    { title: "Active Tasks", icon: ListTodo, count: tasks?.filter(t => !t.completed).length || "0", status: "READY" },
-  ]
+    const widgets = [
+      { title: "Projects", icon: Briefcase, count: projectCount || 0, status: "LIVE" },
+      { title: "Sessions", icon: Clock, count: sessionCount || 0, status: "ACTIVE" },
+      { title: "Neuro_Logs", icon: Brain, count: logCount || 0, status: "SYNCED" },
+      { title: "Cognitive_Load", icon: Activity, count: "42%", status: "OPTIMAL" },
+    ]
 
-  return (
-    <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
-      <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
+    return (
+        <div className="min-h-screen bg-background text-foreground font-display selection:bg-black selection:text-white">
+          <div className="bg-grid fixed inset-0 pointer-events-none opacity-50" />
 
-      {/* Sidebar-ish Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 border-2 border-black bg-white flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
-              <Radio className="w-6 h-6" />
-            </div>
-            <span className="font-bold text-xl tracking-tighter uppercase font-code">System Dashboard</span>
-          </Link>
-
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-6 font-code text-[10px] font-bold uppercase mr-4">
-              <span className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full" />
-                System: Online
-              </span>
-              <span className="opacity-50">V0.1.0-ALPHA</span>
-            </div>
-            <form action={signOut}>
-              <Button
-                type="submit"
-                variant="outline"
-                className="border-2 border-black bg-white rounded-none h-10 px-4 font-code font-bold text-xs hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                TERMINATE SESSION
-              </Button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-      <main className="relative pt-32 pb-24 px-6 max-w-7xl mx-auto">
-        {/* Header / Welcome */}
-        <header className="mb-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <span className="font-code text-[10px] font-bold uppercase tracking-[0.2em] mb-2 block opacity-50">
-                Active Profile: {profile.username || user.email}
-              </span>
-              <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none" style={{ fontFamily: "var(--font-serif)" }}>
-                Welcome to the <br />System, {profile.username || 'User'}.
-              </h1>
-            </div>
-            <div className="flex gap-4">
-              <Link href="/whitepaper">
-                <Button variant="outline" className="border-2 border-black rounded-none font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary transition-all">
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  WHITEPAPER
-                </Button>
+          {/* Sidebar-ish Nav */}
+          <nav className="fixed top-0 left-0 right-0 z-50 border-b-2 border-black bg-white/80 backdrop-blur-sm">
+            <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+              <Link href="/dashboard" className="flex items-center gap-3 group">
+                <div className="w-10 h-10 border-2 border-black bg-white flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                  <Radio className="w-6 h-6" />
+                </div>
+                <span className="font-bold text-xl tracking-tighter uppercase font-code">System Dashboard</span>
               </Link>
-              <Link href="/roadmap">
-                <Button variant="outline" className="border-2 border-black rounded-none font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary transition-all">
-                  <Map className="w-4 h-4 mr-2" />
-                  ROADMAP
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </header>
-
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          {widgets.map((widget, i) => (
-            <div key={i} className="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all">
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-10 h-10 border-2 border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
-                  <widget.icon className="w-5 h-5" />
+              
+              <div className="flex items-center gap-4">
+                <div className="hidden md:flex items-center gap-6 font-code text-[10px] font-bold uppercase mr-4">
+                  <span className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    System: Online
+                  </span>
+                  <span className="opacity-50">V0.1.0-ALPHA</span>
                 </div>
-                <span className="font-code text-[10px] font-bold opacity-30 tracking-widest">{widget.status}</span>
+                <form action={signOut}>
+                  <Button 
+                    type="submit"
+                    variant="outline" 
+                    className="border-2 border-black bg-white rounded-none h-10 px-4 font-code font-bold text-xs hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
+                  >
+                    <LogOut className="w-4 h-4 mr-2" />
+                    TERMINATE SESSION
+                  </Button>
+                </form>
               </div>
-              <h3 className="font-code font-bold text-xs uppercase mb-1">{widget.title}</h3>
-              <div className="text-3xl font-bold tracking-tighter uppercase">{widget.count}</div>
             </div>
-          ))}
+          </nav>
+
+          <main className="relative pt-32 pb-24 px-6 max-w-7xl mx-auto">
+            {/* Header / Welcome */}
+            <header className="mb-12">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                  <span className="font-code text-[10px] font-bold uppercase tracking-[0.2em] mb-2 block opacity-50">
+                    Active Profile: {profile.username || user.email}
+                  </span>
+                  <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none" style={{ fontFamily: "var(--font-serif)" }}>
+                    Welcome to the <br />System, {profile.username || 'User'}.
+                  </h1>
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/whitepaper">
+                    <Button variant="outline" className="border-2 border-black rounded-none font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary transition-all">
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      WHITEPAPER
+                    </Button>
+                  </Link>
+                  <Link href="/roadmap">
+                    <Button variant="outline" className="border-2 border-black rounded-none font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary transition-all">
+                      <Map className="w-4 h-4 mr-2" />
+                      ROADMAP
+                    </Button>
+                  </Link>
+                  <Button className="bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-10 px-6">
+                    <Zap className="w-4 h-4 mr-2" />
+                    NEW_SESSION
+                  </Button>
+                </div>
+              </div>
+            </header>
+
+            {/* Main Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+              {widgets.map((widget, i) => (
+                <div key={i} className="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="w-10 h-10 border-2 border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+                      <widget.icon className="w-5 h-5" />
+                    </div>
+                    <span className="font-code text-[10px] font-bold opacity-30 tracking-widest">{widget.status}</span>
+                  </div>
+                  <h3 className="font-code font-bold text-xs uppercase mb-1">{widget.title}</h3>
+                  <div className="text-3xl font-bold tracking-tighter uppercase">{widget.count}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Profile Card */}
+              <div className="space-y-8">
+                <div className="border-2 border-black bg-secondary/30 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                      <Settings className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-xl uppercase tracking-tighter">Core Profile</h3>
+                      <p className="font-code text-[10px] font-bold opacity-50 uppercase">Access Level: {profile.role}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <span className="font-code text-[10px] font-bold uppercase block mb-2 opacity-50">Core Objective</span>
+                      <div className="border-2 border-black bg-white p-3 font-code font-bold text-xs uppercase">
+                        {profile.goal}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <span className="font-code text-[10px] font-bold uppercase block mb-2 opacity-50">Biometric_Sync</span>
+                      <div className="space-y-3">
+                        <div className="h-4 border-2 border-black bg-white overflow-hidden p-[2px]">
+                          <div className="h-full bg-black w-[65%] animate-pulse" />
+                        </div>
+                        <div className="flex justify-between font-code text-[8px] font-bold uppercase">
+                          <span>Deep Work Intensity</span>
+                          <span>65%</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <span className="font-code text-[10px] font-bold uppercase block mb-2 opacity-50">Tracking Vectors</span>
+                      <div className="flex flex-wrap gap-2">
+                        {profile.interests?.map((interest: string) => (
+                          <span key={interest} className="border border-black px-2 py-1 text-[9px] font-bold uppercase bg-white">
+                            {interest}
+                          </span>
+                        )) || <span className="text-[10px] opacity-50">No vectors initialized</span>}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-8 border-t border-black/10">
+                    <Button className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none h-12 font-code font-bold text-xs">
+                      EDIT CORE_SYSTEM
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="border-2 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                  <h4 className="font-code font-bold text-xs uppercase mb-4 flex items-center gap-2">
+                    <Target className="w-4 h-4" />
+                    Quick_Actions
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button variant="outline" className="border-2 border-black rounded-none h-10 font-code font-bold text-[10px] hover:bg-secondary">NEW_PROJECT</Button>
+                    <Button variant="outline" className="border-2 border-black rounded-none h-10 font-code font-bold text-[10px] hover:bg-secondary">INIT_BRAINSTORM</Button>
+                    <Button variant="outline" className="border-2 border-black rounded-none h-10 font-code font-bold text-[10px] hover:bg-secondary">EXPORT_DATA</Button>
+                    <Button variant="outline" className="border-2 border-black rounded-none h-10 font-code font-bold text-[10px] hover:bg-secondary">SYSTEM_CHECK</Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Task Queue */}
+              <div className="lg:col-span-1">
+                <TaskQueue />
+              </div>
+
+              {/* Neuro Logs */}
+              <div className="lg:col-span-1">
+                <NeuroLogs />
+              </div>
+            </div>
+          </main>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Profile Card */}
-          <div className="md:col-span-1 border-2 border-black bg-secondary/30 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <Settings className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="font-bold text-xl uppercase tracking-tighter">Core Profile</h3>
-                <p className="font-code text-[10px] font-bold opacity-50 uppercase">Access Level: {profile.role}</p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <span className="font-code text-[10px] font-bold uppercase block mb-2 opacity-50">Core Objective</span>
-                <div className="border-2 border-black bg-white p-3 font-code font-bold text-xs uppercase">
-                  {profile.goal}
-                </div>
-              </div>
-
-              <div>
-                <span className="font-code text-[10px] font-bold uppercase block mb-2 opacity-50">Tracking Vectors</span>
-                <div className="flex flex-wrap gap-2">
-                  {profile.interests?.map((interest: string) => (
-                    <span key={interest} className="border border-black px-2 py-1 text-[9px] font-bold uppercase bg-white">
-                      {interest}
-                    </span>
-                  )) || <span className="text-[10px] opacity-50">No vectors initialized</span>}
-                </div>
-              </div>
-
-              <div>
-                <span className="font-code text-[10px] font-bold uppercase block mb-2 opacity-50">Active Stack</span>
-                <div className="flex flex-wrap gap-2">
-                  {profile.tools?.map((tool: string) => (
-                    <span key={tool} className="border border-black px-2 py-1 text-[9px] font-bold uppercase bg-white">
-                      {tool}
-                    </span>
-                  )) || <span className="text-[10px] opacity-50">No tools linked</span>}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 pt-8 border-t border-black/10">
-              <Button className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none h-12 font-code font-bold text-xs">
-                EDIT CORE_SYSTEM
-              </Button>
-            </div>
-          </div>
-
-          {/* System Modules Grid */}
-          <div className="md:col-span-2 space-y-8">
-            <div className="border-2 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-              <NeuroLogManager initialLogs={neuroLogs || []} />
-            </div>
-
-            <div className="border-2 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-              <TaskManager initialTasks={tasks || []} />
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  )
+    )
 }
