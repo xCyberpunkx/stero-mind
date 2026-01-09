@@ -157,6 +157,7 @@ export default function LoginPage() {
                   placeholder="Email address"
                   required
                   defaultValue={rememberedEmail}
+                  autoComplete="email"
                   className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 />
               </div>
@@ -167,6 +168,7 @@ export default function LoginPage() {
                   name="password"
                   placeholder="Password"
                   required
+                  autoComplete="current-password"
                   className="w-full h-14 pl-12 pr-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 />
                 <button

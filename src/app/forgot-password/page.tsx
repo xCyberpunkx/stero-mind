@@ -154,6 +154,7 @@ export default function ForgotPasswordPage() {
                       name="email"
                       placeholder="Email address"
                       required
+                      autoComplete="email"
                       className="w-full h-14 pl-12 border-2 border-black rounded-none font-code text-base focus:ring-0 focus:border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                     />
                   </div>
