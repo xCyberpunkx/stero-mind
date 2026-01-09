@@ -21,6 +21,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/UserNav";
+import { Footer } from "@/components/Footer";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -58,40 +59,39 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="relative pt-32 pb-24">
+      <main className="relative pt-32">
         {/* Hero Section */}
-        <section className="px-6 pb-24 md:pb-40">
-          <div className="max-w-6xl mx-auto border-4 border-black bg-white p-8 md:p-20 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+        <section className="px-6 pb-24">
+          <div className="max-w-6xl mx-auto border-2 border-black bg-white p-8 md:p-16 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <motion.div
               initial="initial"
               animate="animate"
               variants={stagger}
               className="max-w-4xl"
             >
-              <motion.div variants={fadeIn} className="mb-10">
-                <span className="inline-block border-2 border-black px-4 py-2 font-code text-[10px] font-bold bg-secondary uppercase tracking-[0.3em]">
+              <motion.div variants={fadeIn} className="mb-8">
+                <span className="inline-block border-2 border-black px-4 py-1 font-code text-xs font-bold bg-secondary uppercase tracking-widest">
                   v0.1.0-alpha // Open Source Protocol
                 </span>
               </motion.div>
 
               <motion.h1
                 variants={fadeIn}
-                className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-10 leading-[0.85] uppercase"
+                className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[0.9] uppercase"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
                 Build your mind<br />
-                <span className="italic decoration-black underline underline-offset-[12px]">like a system.</span>
+                <span className="italic decoration-black underline underline-offset-8">like a system.</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeIn}
-                className="text-xl md:text-3xl text-black font-medium max-w-2xl mb-16 leading-tight opacity-90"
+                className="text-xl md:text-2xl text-black font-medium max-w-2xl mb-12 leading-tight"
               >
                 Stereo Mind is an ambitious, open-source knowledge architecture.
                 It's not an app; it's a personal infrastructure for tracking learning,
                 visualizing cognition, and engineering a systematic life.
               </motion.p>
-
 
               <motion.div variants={fadeIn} className="flex flex-col gap-6">
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -345,47 +345,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        <footer className="py-16 px-6 border-t-2 border-black bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row items-start justify-between gap-12">
-              <div className="max-w-xs">
-                <div className="flex items-center gap-3 mb-6">
-                  <Radio className="w-8 h-8" />
-                  <span className="font-bold text-2xl uppercase font-code tracking-tighter">Stereo Mind</span>
-                </div>
-                <p className="text-sm font-medium leading-relaxed">
-                  The world's first open-source cognitive infrastructure.
-                  Measure what matters. Grow through clarity.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-12 font-code text-sm">
-                <div className="flex flex-col gap-4">
-                  <span className="font-bold opacity-30 text-[10px] tracking-widest uppercase">Protocol</span>
-                  <a href="#" className="hover:underline">Documentation</a>
-                  <Link href="/whitepaper" className="hover:underline">Whitepaper</Link>
-                  <Link href="/roadmap" className="hover:underline">Roadmap</Link>
-                  <a href="#" className="hover:underline">Open API</a>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <span className="font-bold opacity-30 text-[10px] tracking-widest uppercase">Social</span>
-                  <a href="https://github.com/xCyberpunkx/stero-mind" target="_blank" rel="noopener noreferrer" className="hover:underline">Github</a>
-                  <a href="#" className="hover:underline">Discord</a>
-                  <a href="#" className="hover:underline">Twitter</a>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <span className="font-bold opacity-30 text-[10px] tracking-widest uppercase">Legal</span>
-                  <a href="#" className="hover:underline">Privacy</a>
-                  <a href="#" className="hover:underline">License</a>
-                  <a href="#" className="hover:underline">Terms</a>
-                </div>
-              </div>
-            </div>
-            <div className="mt-16 pt-8 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold font-code opacity-50">
-              <span>© 2026 STEREO MIND PROTOCOL // ALL RIGHTS RESERVED.</span>
-              <span>VERSION 0.1.0-ALPHA // STABLE BRANCH: MAIN</span>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </main>
     </div>
   );

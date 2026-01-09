@@ -4,7 +4,6 @@ import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
-import { BugReportModal } from "@/components/BugReportModal";
 
 export const metadata: Metadata = {
   title: "Stereo Mind | Cognitive Operating System",
@@ -38,7 +37,6 @@ export default function RootLayout({
           data-custom-data='{"appName": "Stereo Mind", "version": "0.1.0-alpha", "greeting": "Protocol Initialized"}'
         />
         {children}
-        <BugReportModal />
         <Toaster />
         <VisualEditsMessenger />
       </body>

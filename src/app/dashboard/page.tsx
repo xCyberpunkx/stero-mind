@@ -18,6 +18,7 @@ import {
   Briefcase
 } from 'lucide-react'
 import { signOut } from '@/app/auth/actions'
+import { BugReport } from '@/components/BugReport'
 
 export default async function DashboardPage() {
     const supabase = await createClient()
@@ -84,54 +85,50 @@ export default async function DashboardPage() {
             </div>
           </nav>
 
-            <main className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto">
-              {/* Header / Welcome */}
-              <header className="mb-20">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
-                  <div className="max-w-3xl">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="font-code text-[10px] font-bold uppercase tracking-[0.4em] opacity-40">
-                        Active Profile: {profile.username || user.email}
-                      </span>
-                      <div className="h-[1px] flex-1 bg-black/10" />
-                    </div>
-                    <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-[0.9]" style={{ fontFamily: "var(--font-serif)" }}>
-                      Welcome to the <br />System, {profile.username || 'User'}.
-                    </h1>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <Link href="/whitepaper">
-                      <Button variant="outline" className="h-14 px-8 border-2 border-black rounded-none font-code font-bold text-[11px] uppercase tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all">
-                        <BookOpen className="w-4 h-4 mr-3" />
-                        WHITEPAPER
-                      </Button>
-                    </Link>
-                    <Link href="/roadmap">
-                      <Button variant="outline" className="h-14 px-8 border-2 border-black rounded-none font-code font-bold text-[11px] uppercase tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all">
-                        <Map className="w-4 h-4 mr-3" />
-                        ROADMAP
-                      </Button>
-                    </Link>
-                  </div>
+          <main className="relative pt-32 pb-24 px-6 max-w-7xl mx-auto">
+            {/* Header / Welcome */}
+            <header className="mb-12">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                  <span className="font-code text-[10px] font-bold uppercase tracking-[0.2em] mb-2 block opacity-50">
+                    Active Profile: {profile.username || user.email}
+                  </span>
+                  <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none" style={{ fontFamily: "var(--font-serif)" }}>
+                    Welcome to the <br />System, {profile.username || 'User'}.
+                  </h1>
                 </div>
-              </header>
-
-              {/* Main Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-                {widgets.map((widget, i) => (
-                  <div key={i} className="border-2 border-black bg-white p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] group hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="w-12 h-12 border-2 border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
-                        <widget.icon className="w-6 h-6" />
-                      </div>
-                      <span className="font-code text-[10px] font-bold opacity-30 tracking-widest border-2 border-black/10 px-2 py-0.5">{widget.status}</span>
-                    </div>
-                    <h3 className="font-code font-bold text-[10px] uppercase tracking-widest mb-2 opacity-60">{widget.title}</h3>
-                    <div className="text-4xl font-bold tracking-tighter uppercase">{widget.count}</div>
-                  </div>
-                ))}
+                <div className="flex gap-4">
+                  <Link href="/whitepaper">
+                    <Button variant="outline" className="border-2 border-black rounded-none font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary transition-all">
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      WHITEPAPER
+                    </Button>
+                  </Link>
+                  <Link href="/roadmap">
+                    <Button variant="outline" className="border-2 border-black rounded-none font-code font-bold text-xs shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary transition-all">
+                      <Map className="w-4 h-4 mr-2" />
+                      ROADMAP
+                    </Button>
+                  </Link>
+                </div>
               </div>
+            </header>
 
+            {/* Main Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+              {widgets.map((widget, i) => (
+                <div key={i} className="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="w-10 h-10 border-2 border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+                      <widget.icon className="w-5 h-5" />
+                    </div>
+                    <span className="font-code text-[10px] font-bold opacity-30 tracking-widest">{widget.status}</span>
+                  </div>
+                  <h3 className="font-code font-bold text-xs uppercase mb-1">{widget.title}</h3>
+                  <div className="text-3xl font-bold tracking-tighter uppercase">{widget.count}</div>
+                </div>
+              ))}
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Profile Card */}
@@ -208,9 +205,18 @@ export default async function DashboardPage() {
                   <span>REF: SM-DATA-001</span>
                   <span>STATUS: INITIALIZING</span>
                 </div>
+                </div>
               </div>
-            </div>
-          </main>
+
+              <footer className="mt-20 pt-8 border-t-2 border-black flex justify-between items-center text-[10px] font-bold font-code opacity-40 uppercase tracking-widest">
+                <span>System Dashboard // v0.1.0-Alpha</span>
+                <div className="flex gap-8">
+                  <Link href="/roadmap" className="hover:underline">Roadmap</Link>
+                  <BugReport />
+                </div>
+              </footer>
+            </main>
         </div>
     )
 }
+
