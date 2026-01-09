@@ -3,26 +3,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
-import { z } from 'zod'
-
-const authSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-})
-
-const signUpSchema = authSchema.extend({
-  first_name: z.string().min(1, 'First name is required'),
-  last_name: z.string().min(1, 'Last name is required'),
-})
-
-// Secure decoder for obfuscated payloads
-function decodeObfuscated(value: string): string {
-  try {
-    return Buffer.from(value, 'base64').toString('utf-8')
-  } catch (e) {
-    return value // Fallback if not encoded
-  }
-}
 
 export async function signInWithGoogle() {
   const supabase = await createClient()
@@ -70,27 +50,18 @@ export async function signUpWithEmail(formData: FormData) {
   const supabase = await createClient()
   const origin = (await headers()).get('origin')
 
-  const rawEmail = formData.get('email') as string
-  const rawPassword = formData.get('password') as string
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
   const firstName = formData.get('first_name') as string
   const lastName = formData.get('last_name') as string
 
-  // Decode obfuscated password from client
-  const password = decodeObfuscated(rawPassword)
-
-  // Validate inputs with Zod to prevent malicious payloads (protection against SQLi patterns)
-  const validation = signUpSchema.safeParse({
-    email: rawEmail,
-    password,
-    first_name: firstName,
-    last_name: lastName,
-  })
-
-  if (!validation.success) {
-    return { error: validation.error.errors[0].message }
+  if (!email || !password || !firstName || !lastName) {
+    return { error: 'All fields are required' }
   }
 
-  const { email, first_name, last_name } = validation.data
+  if (password.length < 6) {
+    return { error: 'Password must be at least 6 characters' }
+  }
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -98,8 +69,8 @@ export async function signUpWithEmail(formData: FormData) {
       options: {
         emailRedirectTo: `${origin}/auth/callback?next=/dashboard`,
         data: {
-          first_name: first_name,
-          last_name: last_name,
+          first_name: firstName,
+          last_name: lastName,
         },
       },
     })
@@ -115,23 +86,12 @@ export async function signUpWithEmail(formData: FormData) {
 export async function signInWithEmail(formData: FormData) {
   const supabase = await createClient()
 
-  const rawEmail = formData.get('email') as string
-  const rawPassword = formData.get('password') as string
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
 
-  // Decode obfuscated password from client
-  const password = decodeObfuscated(rawPassword)
-
-  // Validate inputs with Zod
-  const validation = authSchema.safeParse({
-    email: rawEmail,
-    password,
-  })
-
-  if (!validation.success) {
-    return { error: validation.error.errors[0].message }
+  if (!email || !password) {
+    return { error: 'Email and password are required' }
   }
-
-  const { email } = validation.data
 
   const { error } = await supabase.auth.signInWithPassword({
     email,
