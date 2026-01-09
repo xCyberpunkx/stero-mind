@@ -39,7 +39,7 @@ export function QuickLog({ projects, interests }: QuickLogProps) {
         <span>LOG_MODULE_V1.0</span>
         <span>STATUS_ACTIVE</span>
       </div>
-      
+
       <div className="flex items-center gap-4 mb-8">
         <div className="w-12 h-12 border-2 border-black flex items-center justify-center bg-black text-white">
           <Terminal className="w-6 h-6" />
@@ -64,7 +64,7 @@ export function QuickLog({ projects, interests }: QuickLogProps) {
                     {project.title}
                   </SelectItem>
                 ))}
-                <SelectItem value="" className="font-bold uppercase text-xs">NO_PROJECT</SelectItem>
+                <SelectItem value="none" className="font-bold uppercase text-xs">NO_PROJECT</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -90,12 +90,12 @@ export function QuickLog({ projects, interests }: QuickLogProps) {
         <div className="space-y-2">
           <label className="font-code text-[10px] font-bold uppercase opacity-50">Duration (Minutes)</label>
           <div className="flex gap-4">
-            <Input 
-              type="number" 
-              name="duration" 
+            <Input
+              type="number"
+              name="duration"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              required 
+              required
               className="border-2 border-black rounded-none h-12 font-bold focus:ring-0 w-24"
             />
             <div className="flex flex-wrap gap-2">
@@ -115,15 +115,15 @@ export function QuickLog({ projects, interests }: QuickLogProps) {
 
         <div className="space-y-2">
           <label className="font-code text-[10px] font-bold uppercase opacity-50">Session Notes / Insights</label>
-          <Textarea 
-            name="notes" 
-            placeholder="Document your neuro-evolution..." 
+          <Textarea
+            name="notes"
+            placeholder="Document your neuro-evolution..."
             className="border-2 border-black rounded-none min-h-[100px] font-bold focus:ring-0 placeholder:opacity-30"
           />
         </div>
 
-        <Button 
-          type="submit" 
+        <Button
+          type="submit"
           disabled={loading}
           className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none h-16 font-code font-bold text-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all flex gap-3"
         >

@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 
 export async function createSession(formData: FormData) {
   const supabase = await createClient()
-  
+
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Unauthorized')
 
@@ -16,7 +16,7 @@ export async function createSession(formData: FormData) {
 
   const { error } = await supabase.from('sessions').insert({
     user_id: user.id,
-    project_id: project_id || null,
+    project_id: (project_id && project_id !== 'none') ? project_id : null,
     duration,
     notes,
     tag: tag || 'general'
@@ -35,7 +35,7 @@ export async function createSession(formData: FormData) {
   if (profile) {
     const newXp = (profile.xp || 0) + xpAwarded
     const newLevel = Math.floor(newXp / 1000) + 1
-    
+
     await supabase
       .from('profiles')
       .update({ xp: newXp, level: newLevel })
@@ -47,7 +47,7 @@ export async function createSession(formData: FormData) {
 
 export async function createProject(formData: FormData) {
   const supabase = await createClient()
-  
+
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Unauthorized')
 
