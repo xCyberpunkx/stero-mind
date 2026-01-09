@@ -4,7 +4,6 @@ import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
-import SplashScreen from "@/components/SplashScreen";
 
 export const metadata: Metadata = {
   title: "Stereo Mind | Cognitive Operating System",
@@ -40,7 +39,6 @@ export default function RootLayout({
         {children}
         <Toaster />
         <VisualEditsMessenger />
-        <SplashScreen />
       </body>
     </html>
   );

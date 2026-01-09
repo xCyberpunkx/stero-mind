@@ -5,7 +5,7 @@ import { Radio, Github, Globe, ArrowLeft, Mail, Lock, Eye, EyeOff, User, Loader2
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { signInWithGoogle, signInWithGithub, signUpWithEmail, resendVerificationEmail } from "@/app/auth/actions";
+import { signInWithGoogle, signInWithGithub, signUpWithEmail } from "@/app/auth/actions";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -26,8 +26,6 @@ const stagger = {
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isResending, setIsResending] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
   async function handleEmailSignUp(formData: FormData) {
@@ -37,7 +35,6 @@ export default function SignupPage() {
 
     try {
       const email = formData.get('email') as string;
-      setUserEmail(email);
       console.log(`[Signup] Attempting signup for: ${email}`);
 
       const result = await signUpWithEmail(formData);
@@ -64,24 +61,6 @@ export default function SignupPage() {
       });
     } finally {
       setIsLoading(false);
-    }
-  }
-
-  async function handleResendEmail() {
-    if (!userEmail) return;
-
-    setIsResending(true);
-    try {
-      const result = await resendVerificationEmail(userEmail);
-      if (result.error) {
-        toast.error("Resend Failed", { description: result.error });
-      } else {
-        toast.success("Email Sent", { description: "Verification email has been resent." });
-      }
-    } catch (err) {
-      toast.error("System Error", { description: "Failed to resend email." });
-    } finally {
-      setIsResending(false);
     }
   }
 
@@ -151,21 +130,11 @@ export default function SignupPage() {
                 <p className="font-code text-base font-bold mb-8 leading-relaxed">
                   {message.text}
                 </p>
-                <div className="flex flex-col gap-4">
-                  <Button
-                    variant="outline"
-                    onClick={handleResendEmail}
-                    isLoading={isResending}
-                    className="w-full border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-14 font-code font-bold hover:bg-black hover:text-white transition-all active:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
-                  >
-                    Resend Verification Email
+                <Link href="/">
+                  <Button className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-14 font-code font-bold">
+                    Return to Protocol
                   </Button>
-                  <Link href="/">
-                    <Button className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-14 font-code font-bold transition-all active:shadow-none active:translate-x-[2px] active:translate-y-[2px]">
-                      Return to Protocol
-                    </Button>
-                  </Link>
-                </div>
+                </Link>
               </motion.div>
             ) : (
               <>
@@ -231,11 +200,18 @@ export default function SignupPage() {
                   </div>
                   <Button
                     type="submit"
-                    isLoading={isLoading}
+                    disabled={isLoading}
                     size="lg"
                     className="w-full bg-black text-white hover:bg-white hover:text-black border-2 border-black rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] h-16 text-lg font-code font-bold transition-all flex items-center justify-center gap-3"
                   >
-                    {isLoading ? "Initializing Protocol..." : "Create Account"}
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-6 h-6 animate-spin" />
+                        Initializing Protocol...
+                      </>
+                    ) : (
+                      "Create Account"
+                    )}
                   </Button>
                 </motion.form>
               </>
